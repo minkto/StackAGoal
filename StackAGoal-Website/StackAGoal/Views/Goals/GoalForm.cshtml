@@ -1,0 +1,35 @@
+﻿@model StackAGoal.Models.Goal
+@{
+    ViewData["Title"] = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Goal</h2>
+
+@using (Html.BeginForm("Save", "Goals"))
+{
+
+    <div class="form-group">
+        @Html.LabelFor(g => g.Title)
+        @Html.TextBoxFor(g => g.Title, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(g => g.Description)
+        @Html.TextBoxFor(g => g.Description, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+
+        @Html.LabelFor(g => g.StartDate)
+        @Html.TextBoxFor(g => g.StartDate, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary"> Save </button>
+
+    @Html.HiddenFor(g => g.Id)
+ }
+
+
+
+
+

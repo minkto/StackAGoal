@@ -1,322 +1,203 @@
-/*
-Main background color.
-*/
-
-/*************************************
-*
-* Initial Setup
-*
-**************************************/
-
-*
-{
-    box-sizing: border-box;
+/************************************** Initial Setup**************************************/
+*{
+	box-sizing: border-box;
 }
-
-
-html,body
-{
-  position: relative;
-  margin: 0px;
-  padding: 0px;
-  font-family: 'Roboto', sans-serif;
-  height: 100%;
-  overflow-x: hidden;
+html,body{
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Roboto', sans-serif;
+	height: 100%;
+	overflow-x: hidden;
+    font-size: 20px;
 }
-
-.main-content
-{
-  padding: 1px;
-  position: relative;
-/*
-  min-height: 100%;
-*/
-  height: 100%;
-  overflow-y: hidden;
+.main-content{
+	padding: 1px;
+	position: relative;
+	height: 100%;
+	overflow-y: hidden;
 }
-
-.clearfix:after
-{
-  content: "";
-  clear: both;
-  display: table;
+.clearfix:after{
+	content: "";
+	clear: both;
+	display: table;
 }
-
-a
-{
-  text-decoration: none;
+a{
+	color: #ffffff;
+	text-decoration: none;
 }
-
-
-/*************************************
-*
-* Logo Component
-*
-**************************************/
-.nav-logo
-{
-
-  display:inline-block;
-  float: left;
-  padding: 5px;
-  width: 150px
+/************************************** Logo Component**************************************/
+.nav-logo{
+	display:inline-block;
+	float: left;
+	padding: 5px;
+	width: 150px
 }
-
-
-
-/*************************************
-*
-* Navigation Component
-*
-**************************************/
-.top-nav
-{
-  width: 100%;
-  height: 80px;
-  background-color: #c4ff3f;
-
-  border-bottom: 5px solid #ccff91;
+/************************************** Navigation Component**************************************/
+.top-nav{
+	width: 100%;
+	height: 80px;
+	background-color: #38c941;
+	border-bottom: 5px solid #39cd43;
 }
-
-.top-nav ul
-{
-  list-style:none;
-  float: right;
-  
+.top-nav ul{
+	list-style:none;
+	float: right;
 }
-
-.top-nav ul li
-{
-  display: inline;
-  padding:5px;
-  margin-right:5px;
+.top-nav ul li{
+	display: inline;
+	padding:5px;
+	margin-right:5px;
 }
-
-.top-nav ul li a:active
-{
-  color: #efe5dd;
+.top-nav ul li a:active{
+	color: #efe5dd;
 }
-
-.top-nav ul li a:visited
-{
-  color: #4d7e00;
+.top-nav ul li a:visited{
+	color: #acf7b7;
 }
-
-.top-nav ul li a:hover
-{
-  color: #4b4b4b;
+.top-nav ul li a:hover{
+	color: #4b4b4b;
 }
-
-
-
-/*************************************
-*
-* Login/Register Component
-*
-**************************************/
-.login-register-container
-{
-  background-color: #d3ff71;
- /* position: absolute;
-top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  margin: auto;*/
-
-  border-radius: 5px;
-  margin: 50px auto 0 auto;
-  padding: 5px;
-  width: 500px;
-  height: 450px;
-    box-shadow: 0px 0px 4px #c1c1c1;
-
+/************************************** Login/Register Component**************************************/
+.login-register-container{
+	background-color: #39cd43;
+	border-radius: 5px;
+	margin: 50px auto 0 auto;
+	padding: 5px;
+	width: 500px;
+	height: 400px;
+	box-shadow: 0px 0px 4px #c1c1c1;
 }
-
-.form-group
-{
-  min-width: 50px;
-  width: 100%;
-  padding: 10px;
-  height: 80%;
-  margin: 0 auto;
-  margin-top: 45px;
-  background-color: #d8ff8e;
-}
-.input-container
-{
-  padding: 5px;
-  width: 50%%;
-  margin: 0 auto;
-}
-
-.input-container:first-child
-{
-  margin-top: 40px;
-
-}
-
-.form-label
-{
-  text-align: left;
-  padding: 5px;
-  color: #000000;
-  display: block;
-}
-
-.input-container input[type="text"],input[type="password"]
-{
-  width: 100%;
-  height: 30px;
-  box-shadow:0px 1px 1px #acacac;
-  margin: 0 auto;
-  border-radius: 3px;
-  border: none;
-  padding: 5px;
-}
-
-.input-container .form-button
-{
-  width: 100%;
-  height: 30px;
-  background: none;
-  background-color: #c4ff3f;
-  border: none;;
-  border-radius: 5px;
-}
-
-
-.input-container .form-button.google-btn
-{
-  width: 100%;
-  height: 30px;
-  background: none;
-  
-}
-
-/****************************************
-* 
-* 
-*  Facebook Register/Sign in
-* 
-*****************************************/
-
-
-.input-container.facebook
-{
-  height: 30px;
-  position: relative;
-  margin-bottom: 10px;
-
-}
-
-
-.input-container .form-button.facebook-btn
-{
-  background-color: #3C5A99;
+.form-group{
+	min-width: 50px;
+	width: 100%;
+	padding: 10px;
+	height: 80%;
+	margin: 0 auto;
   color: white;
-  border-radius: 5px;
+	background-color: #38c941;
 }
-
-
-.facebook-icon
-{
-  display: inline;
-  width: 20px;
-  height: auto;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 1px;
+.input-container{
+	padding: 5px;
+	width: 50%%;
+	margin: 0 auto;
 }
-
-/****************************************
-* 
-* 
-*  Google Register/Sign in
-* 
-*****************************************/
-
-.input-container.google
-{
-  height: 30px;
-  position: relative;
+.input-container:first-child{
+	margin-top: 40px;
 }
-
-
-.input-container .form-button.google-btn
-{
-  background-color: #bfbfbf;
-  color: white;
-  border-radius: 5px;
+.form-label{
+	text-align: left;
+	padding: 5px;
+	display: block;
 }
-
-
-.google-icon
-{
-  display: inline;
-  width: 20px;
-  height: auto;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 1px;
+.input-container input[type="text"],input[type="password"]{
+	width: 100%;
+	height: 30px;
+	box-shadow:0px 1px 1px #acacac;
+	margin: 0 auto;
+	border-radius: 3px;
+	border: none;
+	padding: 5px;
 }
-
-
-
-/*************************************
-*
-* Footer Component
-*
-**************************************/
-footer
-{
-/*  bottom: 0px;
-    position: absolute;
-    height: 50px;
-    left: 0px;
-    right: 0px;
-    background-color: black;
-    color: white;
-    text-align: center;*/
-    height: 100px;
-    background-color: black;
-    color: white;
-    text-align: center;
+.input-container .form-button{
+	width: 100%;
+	height: 30px;
+	background: none;
+	background-color: #c4ff3f;
+	border: none;
+	;
+	border-radius: 5px;
 }
-
-footer-container
-{
-  width: 100%;
+.input-container .form-button.google-btn{
+	width: 100%;
+	height: 30px;
+	background: none;
+}
+/***************************************** Facebook Register/Sign in*****************************************/
+.input-container.facebook{
+	height: 30px;
+	position: relative;
+	margin-bottom: 10px;
+}
+.input-container .form-button.facebook-btn{
+	background-color: #3C5A99;
+	color: white;
+	border-radius: 5px;
+}
+.facebook-icon{
+	display: inline;
+	width: 20px;
+	height: auto;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	padding: 1px;
+}
+/***************************************** Google Register/Sign in*****************************************/
+.input-container.google{
+	height: 30px;
+	position: relative;
+}
+.input-container .form-button.google-btn{
+	background-color: #bfbfbf;
+	color: white;
+	border-radius: 5px;
+}
+.google-icon{
+	display: inline;
+	width: 20px;
+	height: auto;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	padding: 1px;
+}
+/************************************** Footer Component**************************************/
+footer{
+	height: 100px;
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+.footer-container{
+	width: 100%;
+}
+/*************************************** Navigation - Dashboard Navigation***************************************/
+.dashboard-side-nav-collapse{
+	padding: 1px;
+	margin-left: 0px;
+	margin-bottom: 5px;
+	background-color: #cbbcbc;
+	min-height: 90%;
+	width: 200px;
+}
+.dashboard-side-nav-main{
+    margin-top: 0;
+	list-style: none;
+	text-decoration: none;
+	text-align: center;
+	padding-left: 0;
+    background-color: #ffffff;
+    height: 30px;
+}
+.dashboard-side-nav-main li{
+  background-color: rgb(119, 245, 240);
+  padding-bottom:10px;
+  padding-top:10px;
+  margin:0px;
+  border-bottom: 1px solid black;
+  
   
 }
-
-/*************************************
-*
-* Navigation - Dashboard Navigation
-*
-**************************************/
-
-.dashboard-side-nav-collapse
+/*************************************** Navigation - Dashboard Navigation***************************************/
+.dashboard-side-nav-main .submenu
 {
-  padding: 5px;
-  margin-left: 0px;  
-  margin-bottom: 5px;
-  background-color: #cbbcbc;
-  min-height: 90%;
-  width: 150px;
-}
-
-.dashboard-side-nav-main
-{
-    list-style: none;
-    text-decoration: none;
-    text-align: center;
   padding-left: 0;
 }
 
-.dashboard-side-nav-main ul li
-{
-   
+
+.dashboard-side-nav-main .submenu li{
+  background-color: greenyellow;
+  list-style: none;text-align: center;
+  
 }

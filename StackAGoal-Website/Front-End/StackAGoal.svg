@@ -17,7 +17,7 @@
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="StackAGoal.svg"
    enable-background="new"
-   inkscape:export-filename="C:\Users\p6ul\Desktop\StackAGoal\bitmap.png"
+   inkscape:export-filename="C:\Users\p6ul\Desktop\StackAGoal\StackAGoal-Website\Front-End\bitmap.png"
    inkscape:export-xdpi="73.780167"
    inkscape:export-ydpi="73.780167">
   <defs
@@ -41,15 +41,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="4.1236384"
-     inkscape:cy="136.70438"
+     inkscape:cx="142.73089"
+     inkscape:cy="89.447405"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
      inkscape:window-width="1920"
      inkscape:window-height="1001"
-     inkscape:window-x="-9"
+     inkscape:window-x="1911"
      inkscape:window-y="-9"
      inkscape:window-maximized="1" />
   <metadata
@@ -60,7 +60,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -79,7 +79,7 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <ellipse
-       style="fill:#95ff95;fill-opacity:1;stroke:none;stroke-width:0.08679194;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       style="fill:#66fe48;fill-opacity:1;stroke:none;stroke-width:0.08679194;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
        id="path815-1-2-2"
        cx="41.475494"
        cy="-293.47064"
@@ -137,7 +137,7 @@
        ry="0.31445643"
        transform="scale(1,-1)" />
     <path
-       style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:0.20647117;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       style="fill:#31ff00;fill-opacity:1;stroke:none;stroke-width:0.20647117;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
        inkscape:transform-center-x="-0.024524693"
        inkscape:transform-center-y="-2.6280664"
        d="m 50.970409,280.83345 c -6.360064,0.0273 -12.92931,7.57437 -19.289375,0.16776 l 9.843049,-18.94415 z"
@@ -145,7 +145,7 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <ellipse
-       style="fill:#95ff95;fill-opacity:1;stroke:none;stroke-width:0.1699874;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       style="fill:#66fe48;fill-opacity:1;stroke:none;stroke-width:0.1699874;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
        id="path815"
        cx="41.379959"
        cy="-281.60995"
@@ -211,7 +211,7 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <ellipse
-       style="fill:#95ff95;fill-opacity:1;stroke:none;stroke-width:0.08679194;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       style="fill:#66fe48;fill-opacity:1;stroke:none;stroke-width:0.08679194;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
        id="path815-1"
        cx="41.46442"
        cy="-286.35928"
@@ -277,7 +277,7 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <ellipse
-       style="fill:#95ff95;fill-opacity:1;stroke:none;stroke-width:0.08679194;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       style="fill:#66fe48;fill-opacity:1;stroke:none;stroke-width:0.08679194;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
        id="path815-1-2"
        cx="31.601334"
        cy="-290.21948"
@@ -343,7 +343,7 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <ellipse
-       style="fill:#95ff95;fill-opacity:1;stroke:none;stroke-width:0.08679194;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       style="fill:#66fe48;fill-opacity:1;stroke:none;stroke-width:0.08679194;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
        id="path815-1-2-2-8"
        cx="50.89072"
        cy="-290.05173"
@@ -393,7 +393,7 @@
        y="-283.81158"
        transform="scale(1,-1)" />
     <ellipse
-       style="fill:#f9f9f9;fill-opacity:1;stroke:none;stroke-width:0.08679194;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.08679194;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke fill markers"
        id="path912-2-9-5-0"
        cx="50.884632"
        cy="-290.02612"
@@ -402,14 +402,14 @@
        transform="scale(1,-1)" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:#00ff00;stroke-width:0.21166667;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;"
-       x="8.4005184"
-       y="268.92111"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic';letter-spacing:0px;word-spacing:0px;fill:#ffffeb;fill-opacity:1;stroke:#00ff00;stroke-width:0.21166667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="9.3361359"
+       y="269.52652"
        id="text1059"><tspan
          sodipodi:role="line"
          id="tspan1057"
-         x="8.4005184"
-         y="268.92111"
-         style="stroke-width:0.21166667;stroke:#00ff00;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;fill:#000000;">StackAGoal</tspan></text>
+         x="9.3361359"
+         y="269.52652"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic';fill:#ffffeb;fill-opacity:1;stroke:#00ff00;stroke-width:0.21166667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">StackAGoal</tspan></text>
   </g>
 </svg>
