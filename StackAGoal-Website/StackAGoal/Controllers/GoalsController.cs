@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StackAGoal.Data;
 using StackAGoal.Models;
+using StackAGoal.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +31,11 @@ namespace StackAGoal.Controllers
         public IActionResult New()
         {
             // If Goal is Valid, Save
-            var newGoal = new Goal();
+            var newGoal = new GoalFormViewModel()
+            {
+                Goal = new Goal(),
+                Categories = context.Categories.ToList()
+            };
             return View("GoalForm", newGoal);
         }
 
@@ -37,16 +43,22 @@ namespace StackAGoal.Controllers
         {
             // If Goal is Valid, Save
             var goal = context.Goals.SingleOrDefault(g => g.Id == id);
+            var categories = context.Categories.ToList();
+
+            var goalFormViewModel = new GoalFormViewModel()
+            {
+                Goal = goal,
+                Categories = categories
+            };
 
             if (goal == null)
                 return BadRequest("Goal Not Found!");
 
-            return View("GoalForm", goal);
+            return View("GoalForm", goalFormViewModel);
         }
 
         public IActionResult Delete(int id)
         {
-            // If Goal is Valid, Save
             var goal = context.Goals.SingleOrDefault(g => g.Id == id);
 
             if (goal == null)
@@ -59,22 +71,29 @@ namespace StackAGoal.Controllers
         }
 
 
-        public IActionResult Save(Goal goal)
+        public IActionResult Save(GoalFormViewModel goalFormViewModel)
         {
-            var goalInDb = context.Goals.SingleOrDefault(g => g.Id == goal.Id);
+
+            if (!ModelState.IsValid)
+            {                
+                return View("GoalForm", goalFormViewModel);
+            }
+
+            var goalInDb = context.Goals.SingleOrDefault(g => g.Id == goalFormViewModel.Goal.Id);
 
             if (goalInDb != null)
             {
-                goalInDb.Title = goal.Title;
-                goalInDb.Description = goal.Description;
-                goalInDb.StartDate = goal.StartDate;
+                goalInDb.Title = goalFormViewModel.Goal.Title;
+                goalInDb.Description = goalFormViewModel.Goal.Description;
+                goalInDb.StartDate = goalFormViewModel.Goal.StartDate;
+
             }
             else
             {
-                context.Add(goal);
+                context.Add(goalFormViewModel.Goal);
             }
 
-            context.SaveChanges();            
+            context.SaveChanges();
             return RedirectToAction("Index");
         }        
     }
