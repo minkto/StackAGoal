@@ -12,5 +12,7 @@ namespace StackAGoal.Models
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
+        public Icon Icon { get; set; }
+        public int? IconId { get; set; }
     }
 }
