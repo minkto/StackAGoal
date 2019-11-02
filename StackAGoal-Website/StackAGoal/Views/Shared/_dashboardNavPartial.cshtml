@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using StackAGoal.Models.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<header class="dashboard main-header">
+    <!-- TODO: Insert Icon -->
+    <div class="top-nav clearfix">
+        <img class="nav-logo" src="~/images/bitmap.png">
+        <div class="hamburger-menu">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+        </div>
+        <nav>
+            <ul>
+                <li class="profile-submenu-nav">
+                    <a href="#">
+                        <div class="down-arrow"></div>
+                        <img class="dashboard-profile-pic" src="~/images/profile-pic.png"><span class="nav-username">
+                            Welcome
+                            @if (User.Identity.IsAuthenticated)
+                            {@User.Identity.Name}
+                        </span>
+                    </a>
+                    <ul class="top-nav-submenu">
+                        <li><a href="#">Option 1</a></li>
+                        <li><a href="#">Option 2</a></li>
+                        <li>
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
+                                <button type="submit" class="nav-link btn btn-link">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

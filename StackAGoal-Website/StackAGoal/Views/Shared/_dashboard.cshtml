@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StackAGoal</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/style.css" />
+        <link href="~/css/queries.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="~/css/dashboard-fonts.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    <environment include="Production">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/style.css" />
+        <link href="~/css/queries.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="~/css/dashboard-fonts.css" />
+    </environment>
+</head>
+<body>
+
+    <partial name="_dashboardNavPartial.cshtml" />
+    <div class="dashboard-side-nav-collapse">
+        <div class="dashboard-side-nav">
+            <ul class="dashboard-side-nav-main">
+                <!-- uses solid style -->
+                <li class="js-submenu-parent"><span class="icon icon-view-goals-icon"></span> Goals</li>
+                <div class="submenu-head">
+                    <li class="submenu">@Html.ActionLink("Add Goal", "CreateGoal", "Goals", null, new { @class = "icon-add-goal-icon" }) </li>
+                    <li class="submenu">@Html.ActionLink("View Goals", "Index", "Goals", null)</li>
+                    <li class="submenu"><a href="#"> Goals Of the Day</a></li>
+                    <li class="submenu"><a href="#"> Completed Goals</a></li>
+                </div>
+                <li class="js-submenu-parent"> Categories</li>
+                <div class="submenu-head">
+                    <li class="submenu"> @Html.ActionLink("Add Category", "CreateCategory", "Categories", null)</li>
+                    <li class="submenu">@Html.ActionLink("View Categories", "Index", "Categories", null)</li>
+                </div>
+                <li><span class="icon-newsicontest"> </span>Achievements</li>
+                <li><span class="icon-newsicontest"> </span>News</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container body-content inner-content">
+        <div class="dashboard-main-content">
+            @RenderBody()
+        </div>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/dashboard.js"></script>
+
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="Production">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/dashboard.js"></script>
+
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -74,7 +74,7 @@ section.hero{
 	padding: 5px;
 }
 /************************************** Login/Register Component**************************************/
-.login-register-container{
+/*.login-register-container{
 	background-color: #39cd43;
 	border-radius: 5px;
 	margin: 50px auto 0 auto;
@@ -122,6 +122,11 @@ section.hero{
 	border: none;
 	;
 	border-radius: 5px;
+}*/
+
+.field-validation-error
+{
+  color: red;
 }
 /***************************************** Facebook Register/Sign in*****************************************/
 .input-container.facebook{

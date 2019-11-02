@@ -1,0 +1,50 @@
+﻿@model StackAGoal.Models.Category
+@{
+    ViewData["Title"] = "CategoryForm";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_dashboard.cshtml";
+}
+
+<h2>Manage Category</h2>
+
+@using(Html.BeginForm("SaveCategory", "Categories"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(c => c.Name)
+        @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+    </div>
+
+    <p>Select an Icon </p>
+    <div style="width:50px; height:50px; background-color:blue" class="icon-current-frame">
+
+    </div>
+
+    <div class="icon-selector-container">
+
+
+    </div>
+
+    <button class="btn btn-primary" type="submit">Save</button>
+
+}
+
+<script>
+    var icons = [];
+    var icon =
+    {
+        name: "",
+        image: []
+
+    }
+
+    function getIcons()
+    {
+        // 1. Get a location for the files.
+
+        // 2. Get a list of all the files.
+
+        // 3. Foreach file create an imageObject
+    }
+
+</script>

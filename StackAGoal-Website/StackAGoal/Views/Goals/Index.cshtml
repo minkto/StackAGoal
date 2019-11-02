@@ -1,33 +1,77 @@
 ﻿@model IEnumerable<StackAGoal.Models.Goal>
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_dashboard.cshtml";
 }
 
 <h2>Goals</h2>
-@Html.ActionLink("Add Goal","New","Goals",null,new {@class = "btn btn-primary" })
-<table class="table" >
+
+<table class="table table-bordered table-dark table-responsive">
     <tr>
         <th>Title</th>
         <th>Description</th>
         <th>Start Date</th>
+        <th>Category</th>
+        <th>Completed</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
     @foreach (var item in Model)
     {
-    <tr>
-        <td>@item.Title</td>
-        <td>@item.Description</td>
-        <td>@item.StartDate</td>
-        <td>@Html.ActionLink("Edit Goal", "Edit", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
-        <td>@Html.ActionLink("Delete Goal", "Delete", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Description</td>
+            <td>@item.StartDate</td>
+            <td>@(item.Category != null ? item.Category.Name : string.Empty)</td>
+            <td><input type="checkbox" /></td>
+            <td>@Html.ActionLink("Edit Goal", "UpdateGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
+            <td>@Html.ActionLink("Delete Goal", "DeleteGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
 
-    </tr>
+        </tr>
 
     }
 
 </table>
+@Html.ActionLink("Add Goal", "CreateGoal", "Goals", null, new { @class = "btn btn-primary" })
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="content-panel">
+                <div class="dashboard-card">
+                    <div class="dashboard-card__number">@Model.Count()</div>
+                    <div class="dashboard-card__text">Number Of Goals</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="content-panel">
+                <div class="dashboard-card">
+                    <div class="dashboard-card__number">0</div>
+                    <div class="dashboard-card__text">Number Of Goals</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="content-panel">
+                <div class="dashboard-card">
+                    <div class="dashboard-card__number">0</div>
+                    <div class="dashboard-card__text">Number Of Goals</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function loadGoalResults()
+    {
+        // Use the API to do some fetch results;
+        var xhr = new XMLHttpRequest();
 
 
+        //xhr.open("POST","")
 
+    }
+</script>

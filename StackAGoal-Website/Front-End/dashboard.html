@@ -12,7 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
     <link href="resources/css/style.css" rel="stylesheet" type="text/css" />
     <link href="resources/css/queries.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="resources/css/icons-style.css"/>
+<!--    <link rel="stylesheet" href="resources/css/icons-style.css"/>-->
+    <link rel="stylesheet" href="resources/css/fontello.css"/>
   </head>
   <body>
     <header class="dashboard main-header">
@@ -41,7 +42,7 @@
       <div class="dashboard-side-nav">
         <ul class="dashboard-side-nav-main">
           <!-- uses solid style -->
-          <li><span class="icon-homeicontest"></span> Goals</li>
+          <li><span class="icon-homeicontest-lg"></span> Goals</li>
           <div class="submenu-head">
             <li class="submenu"> Add Goal</li>
             <li class="submenu"> Goals Of the Day</li>
@@ -55,6 +56,7 @@
     <div class= "dashboard-main-content">
       <div class="inner-content">
         <h1>My Goals</h1>
+        <div style="overflow: auto">
         <table class="table table-bordered table-dark">
           <thead>
             <tr>
@@ -80,6 +82,7 @@
             </tr>
           </tbody>
         </table>
+          </div>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
           irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
@@ -106,6 +109,6 @@
       </div>
     </div>
     <!-- end main container-->
-    <script src="resources/js/script.js"></script>
+    <script src="resources/js/dashboard.js"></script>
   </body>
 </html>

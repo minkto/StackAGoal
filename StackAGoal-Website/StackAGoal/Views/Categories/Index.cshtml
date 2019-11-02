@@ -1,0 +1,21 @@
+﻿@model IEnumerable<StackAGoal.Models.Category>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_dashboard.cshtml";
+}
+
+<h2>Categories</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th> Name </th>
+    </tr>
+    @foreach (Category category in Model)
+    {
+        <tr>
+            <td>@category.Name</td>
+        </tr>
+    }
+
+</table>
+

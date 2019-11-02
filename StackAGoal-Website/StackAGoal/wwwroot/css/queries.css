@@ -1,0 +1,60 @@
+/***********************************************
+*
+* Contains the media queries of the page
+*
+* TODO: Side nav -> Three tiers
+* 500px -> Only show menu ontop
+* 950px -> Shrink size
+***********************************************/
+
+@media only screen and (max-width: 900px) {
+
+    html, body {
+        font-size:95%;
+    }
+
+    /*.dashboard.main-header .top-nav ul {
+        display:none;
+    }*/
+    .dashboard-profile-pic {
+        width: 30px;
+    }
+
+    .dashboard-side-nav-collapse {
+        box-shadow: 5px 5px 50px 1px #000;
+        display: none;
+        width: 0;
+        font-size:20px;
+    }
+  
+  .inner-content {
+    margin-left: 0px;
+    /*background-color: lightblue;*/
+  }
+
+    .container.body-content.inner-content {
+        margin-left: auto;
+        margin-right:auto;
+    }
+
+
+}
+@media only screen and (max-width:440px) 
+{
+    .top-nav-submenu {
+        width: 100%;
+        z-index: -1;
+        top: 65px;
+        text-align: center;
+    }
+
+    span.nav-username 
+    {
+        display:none;
+    }
+
+    .profile-submenu-nav 
+    {
+        position:static;
+    }
+}

@@ -10,6 +10,10 @@ namespace StackAGoal.ViewModels
     {
         public Goal Goal { get; set; }
 
+        public int UserID { get; set; }
+
+        public int? CategoryId { get; set; }
+
         public List<Category> Categories { get; set; }
 
     }
