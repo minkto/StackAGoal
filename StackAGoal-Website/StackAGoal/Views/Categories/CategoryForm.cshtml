@@ -1,50 +1,92 @@
-﻿@model StackAGoal.Models.Category
+﻿@model StackAGoal.ViewModels.CategoryFormViewModel
 @{
-    ViewData["Title"] = "CategoryForm";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Manage Categories";
     Layout = "~/Views/Shared/_dashboard.cshtml";
 }
 
 <h2>Manage Category</h2>
 
-@using(Html.BeginForm("SaveCategory", "Categories"))
+@using (Html.BeginForm("SaveCategory", "Categories"))
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor(c => c.Name)
         @Html.TextBoxFor(c => c.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Name)
+    </div>
+
+    <p>Current Icon </p>
+    <div class="selected-icon-container">
+        @if (Model.IconId.HasValue)
+        {
+            <img class="selected-icon" data-selected-icon="@Model.IconId" src="@Model.ImageURL"
+             style="display:inline-block;width:50px;height:50px" />
+        }
+        else
+        {
+            <img class="selected-icon" data-selected-icon="-1" 
+             style="display:inline-block;width:50px;height:50px" />
+        }
     </div>
 
     <p>Select an Icon </p>
-    <div style="width:50px; height:50px; background-color:blue" class="icon-current-frame">
-
-    </div>
-
     <div class="icon-selector-container">
-
-
+        <div class="icon-list">
+            @foreach (Icon icon in Model.Icons)
+            {
+                <img class="icon-item" src="@icon.ImageURL" style="display:inline-block;width:50px;height:50px"
+                     data-icon-id="@icon.Id" />;
+            }
+        </div>
     </div>
-
     <button class="btn btn-primary" type="submit">Save</button>
-
+    @Html.HiddenFor(c => c.Id);
+    @Html.HiddenFor(c => c.ImageURL, new { @id = "imageURL" });
+    @Html.HiddenFor(c => c.IconId, new { @id = "iconId" })
 }
 
 <script>
-    var icons = [];
-    var icon =
-    {
-        name: "",
-        image: []
+    /**
+     * Update the selected icon picture and model Id based on the icon that
+     * is clicked.
+     * @@param event
+     */
+    function updateCurrentIcon(event) {
+        let sourceImage = event.target;
+        let currentIcon = document.querySelector('img.selected-icon');
+        let modelIconId = document.querySelector('#iconId');
+        let modelIconImageURL = document.querySelector('#imageURL');
 
+        currentIcon.src = sourceImage.src;
+        currentIcon.dataset.selectedIcon = sourceImage.dataset.iconId;
+        modelIconId.value = currentIcon.dataset.selectedIcon;
+        modelIconImageURL.value = currentIcon.src;
     }
 
-    function getIcons()
-    {
-        // 1. Get a location for the files.
-
-        // 2. Get a list of all the files.
-
-        // 3. Foreach file create an imageObject
+    /**
+     * Add the initial onclick event required to each of the
+     * icons.
+     * */
+    function initIconChange() {
+        let iconList = document.querySelectorAll('.icon-item');
+        for (let i = 0; i < iconList.length; i++) {
+            var icon = iconList[i];
+            icon.addEventListener('click', updateCurrentIcon);
+            icon.addEventListener('click', changeActiveIcon);
+        }
     }
+
+    function changeActiveIcon(e) {
+        let currentSelectedIcon = document.querySelector('.active-icon');
+        let newlySelectedIcon = e.target;
+
+        if (typeof (currentSelectedIcon) !== 'undefined' && currentSelectedIcon !== null) {
+            currentSelectedIcon.classList.toggle('active-icon');
+        }
+
+        newlySelectedIcon.classList.toggle('active-icon');
+    }
+
+    initIconChange();
 
 </script>

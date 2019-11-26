@@ -10,7 +10,6 @@
 @media only screen and (max-width: 900px) {
 
     html, body {
-        font-size:95%;
     }
 
     /*.dashboard.main-header .top-nav ul {
@@ -21,10 +20,9 @@
     }
 
     .dashboard-side-nav-collapse {
-        box-shadow: 5px 5px 50px 1px #000;
+        box-shadow: 5px 0px 20px 1px #898989;
         display: none;
         width: 0;
-        font-size:20px;
     }
   
   .inner-content {

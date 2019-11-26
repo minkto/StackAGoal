@@ -8,30 +8,33 @@
 <h2>Goals</h2>
 
 <table class="table table-bordered table-dark table-responsive">
-    <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Start Date</th>
-        <th>Category</th>
-        <th>Completed</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>@item.Title</td>
-            <td>@item.Description</td>
-            <td>@item.StartDate</td>
-            <td>@(item.Category != null ? item.Category.Name : string.Empty)</td>
-            <td><input type="checkbox" /></td>
-            <td>@Html.ActionLink("Edit Goal", "UpdateGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
-            <td>@Html.ActionLink("Delete Goal", "DeleteGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
-
+            <th>Title</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>Category</th>
+            <th>Completed</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>@item.StartDate</td>
+                <td>@(item.Category != null ? item.Category.Name : string.Empty)</td>
+                <td><input type="checkbox" /></td>
+                <td>@Html.ActionLink("Edit Goal", "UpdateGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
+                <td>@Html.ActionLink("Delete Goal", "DeleteGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
 
-    }
+            </tr>
 
+        }
+    </tbody>
 </table>
 @Html.ActionLink("Add Goal", "CreateGoal", "Goals", null, new { @class = "btn btn-primary" })
 

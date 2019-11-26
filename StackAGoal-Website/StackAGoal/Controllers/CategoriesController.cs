@@ -1,10 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StackAGoal.Models;
 using StackAGoal.Models.Identity;
+using StackAGoal.ViewModels;
 using System.Linq;
 
 namespace StackAGoal.Controllers
 {
+    /// <summary>
+    /// This controller will manage actions to do with Categories.
+    /// </summary>
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext dbContext;
@@ -17,42 +22,72 @@ namespace StackAGoal.Controllers
         public IActionResult Index()
         {
             var categories = dbContext.Categories.ToList();
-
             return View(categories);
         }
 
-        /// <summary>
-        /// Creates a new Cateogry to set.
-        /// </summary>
-        /// <returns></returns>
         public IActionResult CreateCategory()
         {
-            var category = new Category();
-            return View("CategoryForm", category);
+            var categoryFormVM = new CategoryFormViewModel()
+            {
+                Icons = dbContext.Icons.ToList()
+            };
+
+            return View("CategoryForm", categoryFormVM);
         }
 
         public IActionResult UpdateCategory(int id)
         {
-            var category = dbContext.Categories.SingleOrDefault(c => c.Id == id);
+            var category = dbContext.Categories.Include(i => i.Icon).Single(c => c.Id == id);
+            var categoryViewModel = new CategoryFormViewModel(category)
+            {
+                Icons = dbContext.Icons.ToList()
+            };
 
-            if (category == null)
+            if (categoryViewModel == null)
                 NotFound("Category Not Found");
 
-            return View("CategoryForm", category);
+            return View("CategoryForm", categoryViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SaveCategory(Category category)
+        public IActionResult SaveCategory(CategoryFormViewModel categoryVM)
         {
             if (!ModelState.IsValid)
             {
-                return View("CategoryForm", category);
+                categoryVM.Icons = dbContext.Icons.ToList();
+                return View("CategoryForm", categoryVM);
             }
 
-            if (category.Id == 0)
-                dbContext.Add(category);
+            if (categoryVM.Id == 0)
+            {
+                var newCategory = new Category();
+                newCategory.IconId = categoryVM.IconId;
+                newCategory.Name = categoryVM.Name;
+                dbContext.Add(newCategory);
+            }
+            else
+            {
+                var categoryInDb = dbContext.Categories.SingleOrDefault(c => c.Id == categoryVM.Id);
+                categoryInDb.Name = categoryVM.Name;
+                categoryInDb.IconId = categoryVM.IconId;
+            }
 
+            dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult DeleteCategory(int id)
+        {
+            var category = dbContext.Categories.Single(c => c.Id == id);
+
+            if (category == null)
+                BadRequest("Category Not found");
+
+            // This will get the goals associated with this Cateogry and set the CategoryID to null.
+            dbContext.Goals.Where(g => g.CategoryId == category.Id).Load();
+            dbContext.Remove(category);
             dbContext.SaveChanges();
 
             return RedirectToAction("Index");

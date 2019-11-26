@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using StackAGoal.Models;
-using StackAGoal.Models.Identity;
 
 namespace StackAGoal.Models.Identity
 {
@@ -21,7 +16,7 @@ namespace StackAGoal.Models.Identity
     {
         public DbSet<Goal> Goals { get; set; }
         public DbSet<Category> Categories  { get; set; }
-
+        public DbSet<Icon> Icons { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
