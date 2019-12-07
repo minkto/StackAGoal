@@ -20,7 +20,9 @@ namespace StackAGoal.Models
         [DisplayName("Start Date")]
         [DataType(DataType.DateTime)]
         public DateTime? StartDate { get; set; }
-        
+
+        public bool? IsComplete { get; set; }
+
         public Category Category { get; set; }
         public int? CategoryId { get; set; }
         
