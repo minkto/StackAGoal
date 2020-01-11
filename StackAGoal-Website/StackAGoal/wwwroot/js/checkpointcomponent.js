@@ -29,13 +29,6 @@ var checkpointModule = (function () {
         descriptionBox.target.setAttribute('readonly', 'true');
         descriptionBox.target.classList.toggle('readonly');  
 
-        
-        if (document.activeElement !== editSaveBtn)
-        {
-            editSaveBtn.classList.toggle('editmode');
-            //setTimeout(() => editSaveBtn.classList.toggle('editmode'), 200);            
-        }
-
     }
 
     function showMenu(sourceElement,id) {
