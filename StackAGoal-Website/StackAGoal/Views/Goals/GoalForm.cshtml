@@ -7,7 +7,6 @@
 }
 
 <h2>New Goal</h2>
-
 @using (Html.BeginForm("Save", "Goals"))
 {
 
@@ -24,11 +23,9 @@
     <div class="form-group">
 
         @Html.LabelFor(g => g.Goal.StartDate)
-        @Html.TextBoxFor(g => g.Goal.StartDate, new { @class = "form-control" })
-        @Html.ValidationMessageFor(g=> g.Goal.StartDate)
+        @Html.TextBoxFor(g => g.Goal.StartDate,"{0:yyyy-MM-dd}", new { @class = "form-control", type = "date"})
+        @Html.ValidationMessageFor(g => g.Goal.StartDate)
     </div>
-
-
 
     <div class="form-group">
         @Html.LabelFor(c => c.Goal.Category)
@@ -36,11 +33,149 @@
 
     </div>
 
+    @if (Model.Goal.Id > 0)
+    {
+    <div class="form-group">
+        @Html.LabelFor(g => g.Goal.IsComplete)
+        @Html.CheckBoxFor(g => g.Goal.IsComplete)
+
+    </div>
+    }
+
+    if (Model.Goal.Id > 0)
+    {
+        <hr />
+        <h2>Options</h2>
+        <button type="button" class="edit-checkpoints-btn btn btn-secondary" data-toggle="modal">
+            Edit Checkpoints
+        </button>
+        <!-- Modal For Checkpoints-->
+        <div class="modal fade" id="checkpointModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Checkpoints</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="checkpoint-container">
+                            <div class="checkpoint-list">                             
+                            </div>
+                            <div class="checkpoint-input-container">
+                                <textarea class="js-checkpoint-description-input"></textarea>
+                                <input type="button" class="js-checkpoint-btn btn btn-secondary" value="Add Checkpoint">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <hr />
+
     <button type="submit" class="btn btn-primary"> Save </button>
 
     @Html.HiddenFor(g => g.Goal.Id)
     @Html.AntiForgeryToken();
+    @section Scripts
+    {
+        <script src="@Url.Content("~/js/checkpointcomponent.js")"></script>
+        <script type="text/javascript">
+            (function () {
+                $(document).ready(function ()
+                {
+                    checkpointMod = checkpointModule();
+                    checkpointMod.initComponent();
 
+                    var editCheckpointsBtn = document.querySelector('.edit-checkpoints-btn'),
+                        addCheckpointBtn   = document.querySelector('.js-checkpoint-btn');
+
+                    editCheckpointsBtn.addEventListener('click', getCheckpoints);
+                    addCheckpointBtn.addEventListener('click', createCheckpoint);
+                });
+
+                /**
+                 * Creates a Checkpoint using  AJAX.
+                 * @@param The event.
+                 */
+                function createCheckpoint(e) {
+                    var viewModel = @Html.Raw(Json.Serialize(Model));
+
+                    e.preventDefault();
+                    var newCheckpointDescription = document.querySelector('.js-checkpoint-description-input');
+
+                    var checkpoint =
+                    {
+                        description: newCheckpointDescription.value,
+                        goalId: viewModel.goal.id
+                    };
+
+                    newCheckpointDescription.value = "";
+
+                     $.ajax({
+
+                         url: '@Url.Action("CreateCheckpoint", "Checkpoints")',
+                         method: 'POST',
+                         contentType: 'application/json; charset=utf-8',
+                         data: JSON.stringify(checkpoint),
+                         success: function(data)
+                         {
+                             if (data.id > 0) {
+                                 checkpointMod.createItem(data.id, data.description,false);
+                             }
+                             else
+                             {
+                                 alert('Checkpoint has not been created');
+                             }
+
+                             console.log('AJAX Success');
+                         },
+                         error: function(xhr, status, error) {
+                             alert(xhr.responseText);
+                             console.log(xhr.statusText);
+                         }
+                     });
+                }
+
+                /**
+                 * This will retrieve and create a list of checkpoints
+                 * via the checkpoint component.
+                 * @@param The event.
+                 */
+                function getCheckpoints(e)
+                {
+                    e.preventDefault();
+
+                    checkpointMod.resetComponent();
+
+                    $.ajax({
+                        url: '@Url.Action("GetCheckpointsByGoal", "Checkpoints",new {goalId = Model.Goal.Id })',
+                        method: 'GET',
+                         success: function(data)
+                         {
+                             var checkpoints = data.checkpoints;
+
+                             for (let i = 0; i < checkpoints.length; i++)
+                             {
+                                 checkpointMod.createItem(checkpoints[i].id, checkpoints[i].description, checkpoints[i].isComplete);
+
+                             }
+                             console.log(data);
+                             $('#checkpointModal').modal("show");
+
+                             console.log('Loaded Partial');
+                         },
+                         error: function(xhr, status, error) {
+                             alert(xhr.responseText);
+                             console.log(xhr.statusText);
+                         }
+                    });
+                }
+                })();          
+        </script>
+    }
 }
 
 

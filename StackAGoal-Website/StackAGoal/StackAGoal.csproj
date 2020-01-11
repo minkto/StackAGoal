@@ -6,8 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20190806150242_AddGoalsModel.cs" />
-    <Compile Remove="Data\Migrations\20190806150242_AddGoalsModel.Designer.cs" />
+    <Compile Remove="Data\**" />
+    <Compile Remove="Helpers\**" />
+    <Content Remove="Data\**" />
+    <Content Remove="Helpers\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <EmbeddedResource Remove="Helpers\**" />
+    <None Remove="Data\**" />
+    <None Remove="Helpers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Migrations\20191009193905_AddUserReferenceToGoal.cs" />
     <Compile Remove="Migrations\20191009193905_AddUserReferenceToGoal.Designer.cs" />
     <Compile Remove="Migrations\20191010200512_AddUserToGoal.cs" />
@@ -27,8 +36,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
-    <Folder Include="Data\Migrations\" />
-    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

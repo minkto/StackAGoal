@@ -6,17 +6,9 @@ using System.Threading.Tasks;
 
 namespace StackAGoal.ViewModels
 {
-    public class GoalFormViewModel
+    public class CheckpointsModalViewModel
     {
-        public Goal Goal { get; set; }
-
-        public int UserID { get; set; }
-
-        public int? CategoryId { get; set; }
-
-        public List<Category> Categories { get; set; }
-
         public List<Checkpoint> Checkpoints { get; set; }
-
+        public int GoalId { get; set; }
     }
 }

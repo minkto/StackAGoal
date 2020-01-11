@@ -66,12 +66,14 @@ namespace StackAGoal.Controllers
             // If Goal is Valid, Save
             var goal = context.Goals.SingleOrDefault(g => g.Id == id);
             var categories = context.Categories.ToList();
+            
 
             var goalFormViewModel = new GoalFormViewModel()
             {
                 Goal = goal,
                 CategoryId = goal.CategoryId,
                 Categories = categories
+                
             };
 
             if (goal == null)
@@ -132,6 +134,7 @@ namespace StackAGoal.Controllers
                 goalInDb.StartDate = goalFormViewModel.Goal.StartDate;
                 goalInDb.CategoryId = goalFormViewModel.Goal.CategoryId;
                 goalInDb.UserId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                goalInDb.IsComplete = goalFormViewModel.Goal.IsComplete;
             }
 
             context.SaveChanges();

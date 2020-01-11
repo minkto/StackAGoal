@@ -37,7 +37,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 .icon-home:before {
   content: "\61";
 }
@@ -52,4 +51,16 @@
 }
 .icon-cross:before {
   content: "\65";
+}
+.icon-dot-3:before {
+  content: "\66";
+}
+.icon-pencil-square-o:before {
+  content: "\67";
+}
+.icon-square-o:before {
+  content: "\68";
+}
+.icon-check-square-o:before {
+  content: "\69";
 }

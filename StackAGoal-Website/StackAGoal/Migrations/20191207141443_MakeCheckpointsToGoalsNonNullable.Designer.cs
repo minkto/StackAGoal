@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StackAGoal.Models.Identity;
 
 namespace StackAGoal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191207141443_MakeCheckpointsToGoalsNonNullable")]
+    partial class MakeCheckpointsToGoalsNonNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,7 +158,7 @@ namespace StackAGoal.Migrations
                         .IsRequired()
                         .HasMaxLength(255);
 
-                    b.Property<int>("GoalId");
+                    b.Property<int?>("GoalId");
 
                     b.Property<bool>("IsComplete");
 
@@ -318,10 +320,9 @@ namespace StackAGoal.Migrations
 
             modelBuilder.Entity("StackAGoal.Models.Checkpoint", b =>
                 {
-                    b.HasOne("StackAGoal.Models.Goal", "Goal")
+                    b.HasOne("StackAGoal.Models.Goal")
                         .WithMany("Checkpoints")
-                        .HasForeignKey("GoalId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("GoalId");
                 });
 
             modelBuilder.Entity("StackAGoal.Models.Goal", b =>

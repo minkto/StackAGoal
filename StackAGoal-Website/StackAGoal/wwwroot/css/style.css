@@ -35,7 +35,7 @@ a {
 }
 
     a:active, a:hover {
-        color:#000;
+        color: #000;
         text-decoration: none;
     }
 /************************************** Logo Component**************************************/
@@ -228,6 +228,7 @@ section.hero {
 /*************************************** Navigation - Dashboard Navigation***************************************/
 .dashboard.main-header {
     width: 100%;
+    height: 80px;
     position: fixed;
     top: 0;
     z-index: 2;
@@ -277,7 +278,7 @@ section.hero {
     opacity: 1;
     transition: all 0.2s ease;
     width: 100%;
-    color:#000;
+    color: #000;
 }
 
 .dashboard-side-nav-collapse.hide-menu {
@@ -504,23 +505,23 @@ input[type=checkbox]#hamburger-checkbox {
     z-index: 1;
 }
 
-/************** Hamburger rotation effect *******************************/
+    /************** Hamburger rotation effect *******************************/
 
-input[type=checkbox]#hamburger-checkbox:checked + .hamburger-bar {
-    margin-top: 10px;
-    transform: rotate(45deg);
-}
+    input[type=checkbox]#hamburger-checkbox:checked + .hamburger-bar {
+        margin-top: 10px;
+        transform: rotate(45deg);
+    }
 
-input[type=checkbox]#hamburger-checkbox:checked + .hamburger-bar + .hamburger-bar {
-    visibility: hidden;
-    margin-bottom: 0;
-    display: block;
-}
+        input[type=checkbox]#hamburger-checkbox:checked + .hamburger-bar + .hamburger-bar {
+            visibility: hidden;
+            margin-bottom: 0;
+            display: block;
+        }
 
-input[type=checkbox]#hamburger-checkbox:checked + .hamburger-bar + .hamburger-bar + .hamburger-bar {
-    margin-top: -17px;
-    transform: rotate(-45deg);
-}
+            input[type=checkbox]#hamburger-checkbox:checked + .hamburger-bar + .hamburger-bar + .hamburger-bar {
+                margin-top: -17px;
+                transform: rotate(-45deg);
+            }
 
 
 .icon-selector-container .icon-list {
@@ -546,4 +547,163 @@ input[type=checkbox]#hamburger-checkbox:checked + .hamburger-bar + .hamburger-ba
     margin-left: auto;
     margin-right: auto;
     transition: all 0.2s ease-in-out;
+}
+
+
+
+/*********************Checkpoint Component*************************************/
+
+
+.checkpoint-container {
+    background-color: #EFEFEF;
+    height: 450px;
+    padding: 5px;
+    height: auto;
+    border-radius: 4px;
+    width: 100%;
+    box-shadow: 1px 1px 1px 1px #cecece;
+}
+
+
+
+.checkpoint-item-container {
+    height: auto;
+    margin-bottom: 3px;
+    position: relative;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.02);
+    padding: 0 10px 10px 10px;
+    transition: background-color 0.2s,opacity 0.2s;
+    opacity: 1;
+}
+
+    .checkpoint-item-container.deleted {
+        opacity: 0;
+    }
+
+    .checkpoint-item-container:hover {
+        background-color: #dbdbdb;
+    }
+
+input.js-checkpoint-btn.btn.btn-primary {
+    display: block;
+    margin: 0 auto;
+}
+
+.js-checkpoint-description-input {
+    width: 100%;
+}
+
+.edit-box {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2px;
+}
+
+
+/*********Checkpoint Textarea****************/
+textarea.checkpoint-description.readonly {
+    border: none;
+    background-color: #e3e3e3;
+}
+
+textarea.checkpoint-description:focus {
+    background-color: #fff;
+}
+
+textarea.checkpoint-description.readonly:focus {
+    background-color: #e3e3e3;
+}
+
+
+textarea.checkpoint-description,
+textarea.checkpoint-description.readonly {
+    word-wrap: break-word;
+    width: 85%;
+    height: auto;
+    margin-left: 15px;
+    resize: none;
+    border-radius: 5px;
+}
+
+/*********Checkpoint done marker****************/
+
+.checkpoint-done {
+    position: absolute;
+    top: 0;
+    width: 30px;
+    right: 0;
+    height: 35px;
+    height: 30px;
+}
+
+.checkpoint-done {
+    color: #00c44b;
+}
+
+
+/**************************************
+*
+*  Checkpoint-popup-box
+**************************************/
+.checkpoint-header {
+    background-color: greenyellow;
+    margin-top: 0;
+    height: 30px;
+    border-top-left-radius: 5px;
+}
+
+.checkpoint-edit-menu {
+    font-size: 80%;
+    z-index: 4;
+    top: 20px;
+    width: 200px;
+    position: absolute;
+    background-color: rgb(245, 245, 245);
+    padding: 0px 0 0 0;
+    border-top-left-radius: 5px;
+    box-shadow: 0 2px 5px 1px #7b7b7b;
+}
+
+    .checkpoint-edit-menu p {
+        text-align: center;
+    }
+
+    .checkpoint-edit-menu ul {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+
+        .checkpoint-edit-menu ul li {
+            border-bottom: 1px solid #dddddd;
+            background-color: #ebebeb;
+            padding: 5px;
+        }
+
+            .checkpoint-edit-menu ul li:hover {
+                background-color: aliceblue;
+            }
+
+            .checkpoint-edit-menu ul li a {
+                width: 100%;
+                padding-right: 165px;
+            }
+
+.checkpoint-edit-save-btn {
+    display: block;
+    margin-right: 0px;
+    margin-left: auto;
+}
+
+    .checkpoint-edit-save-btn.editmode {
+        display: block;
+        margin-right: 0px;
+        margin-left: auto;
+    }
+
+.checkpoint-edit-save-btn {
+    display: none;
 }

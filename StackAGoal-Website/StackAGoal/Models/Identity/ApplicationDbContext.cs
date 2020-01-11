@@ -17,6 +17,7 @@ namespace StackAGoal.Models.Identity
         public DbSet<Goal> Goals { get; set; }
         public DbSet<Category> Categories  { get; set; }
         public DbSet<Icon> Icons { get; set; }
+        public DbSet<Checkpoint> Checkpoints { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -32,6 +33,9 @@ namespace StackAGoal.Models.Identity
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Checkpoint>()
+                        .ToTable("Checkpoints", "dbo");
         }
     }
 }
