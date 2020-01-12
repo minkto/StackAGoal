@@ -1,5 +1,7 @@
 var checkpointModule = (function () {
-
+   
+    var ajaxPutUrl;
+    var ajaxDeleteUrl;
 
     /** This will hold all the loaded model checkpoints. */
     let CheckpointHashTable = {};
@@ -169,7 +171,6 @@ var checkpointModule = (function () {
             // update flag icon
             if (!icon.classList.contains('done')) {
                 icon.className = 'icon-check-square-o done';
-                console.log('toggle done')
             } else {
                 icon.className = 'icon-square-o';
             }   
@@ -224,18 +225,23 @@ var checkpointModule = (function () {
         CheckpointHashTable = {};
     }
 
-    function updateCheckpointAJAX(checkpoint)
+    function updateCheckpointAJAX(checkpointToUpdate)
     {
-        console.log('Updating checkpoint....');
+        var checkpoint = JSON.stringify(checkpointToUpdate);
         $.ajax({
-            url: "/Checkpoints/UpdateCheckpointsByGoal",
+            url: ajaxPutUrl,
             method: 'PUT',
-            contentType: 'application/json; charset=utf-8',
-            data: JSON.stringify(checkpoint),
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: checkpoint,
             success: function (data) {
                 if (data > 0) {
                     console.log('checkpoint has been updated.');
                 }
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                console.log(xhr.statusText);
             }
         });
     }
@@ -243,18 +249,19 @@ var checkpointModule = (function () {
     function deleteCheckpointAJAX(checkpoint) {
         var id = checkpoint.id;
 
-        console.log('Deleting Checkpoint.');
-        console.log(checkpoint);
-        console.log(checkpoint.id);
         $.ajax({
-            url: "/Checkpoints/DeleteCheckpoint?id=" + id,
+            url: ajaxDeleteUrl,
             method: 'DELETE',
-            contentType: 'application/json; charset=utf-8',
-            data: id,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(id),
             success: function (data) {
                 if (data > 0) {
                     console.log('checkpoint has been successfully deleted.');
                 }
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+                console.log(xhr.statusText);
             }
         });
     }
@@ -270,6 +277,14 @@ var checkpointModule = (function () {
         createItem: function (id, description, isComplete) {
             CheckpointHashTable["checkpoint-" + id] = new CheckpointItem(id, description, isComplete);
             createCheckpointUIComponent(CheckpointHashTable["checkpoint-" + id]);
+        },
+        setAjaxPUTUrl:function(url)
+        {
+            ajaxPutUrl = url;
+        },
+        setAjaxDeleteUrl:function(url)
+        {
+            ajaxDeleteUrl = url;
         }
     }
 

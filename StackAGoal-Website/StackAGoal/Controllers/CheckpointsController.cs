@@ -7,6 +7,9 @@ using StackAGoal.ViewModels;
 
 namespace StackAGoal.Controllers
 {
+    /// <summary>
+    /// This controller is used to manage Checkpoints.
+    /// </summary>
     public class CheckpointsController : Controller
     {
         protected ApplicationDbContext dbContext;
@@ -38,19 +41,19 @@ namespace StackAGoal.Controllers
         }
 
         [HttpPut]
-        public JsonResult UpdateCheckpointsByGoal([FromBody]Checkpoint checkpoint)
+        public JsonResult UpdateCheckpoint([FromBody]Checkpoint checkpoint)
         {
-            int result = 0;
+            int updateResult = 0;
             var checkpointDb = dbContext.Checkpoints.SingleOrDefault(c => c.Id == checkpoint.Id);
 
             if (ModelState.IsValid)
             {
                 checkpointDb.Description = checkpoint.Description;
                 checkpointDb.IsComplete = checkpoint.IsComplete;
-                dbContext.SaveChanges();
+                updateResult = dbContext.SaveChanges();
             }
 
-            return Json(new { result = result });
+            return Json(new { result = updateResult });
         }
 
         [HttpGet]
@@ -66,7 +69,7 @@ namespace StackAGoal.Controllers
         }
 
         [HttpDelete]
-        public JsonResult DeleteCheckpoint(int id)
+        public JsonResult DeleteCheckpoint([FromBody]int id)
         {
             int deleteResult = 0;
             var checkpoint = dbContext.Checkpoints.SingleOrDefault(c => c.Id == id);

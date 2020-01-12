@@ -89,6 +89,11 @@
                     checkpointMod = checkpointModule();
                     checkpointMod.initComponent();
 
+                    // Pass in AJAX Url's to be generated  to ensure correct URL.
+                    checkpointMod.setAjaxPUTUrl('@Url.Action("UpdateCheckpoint","Checkpoints")');
+                    checkpointMod.setAjaxDeleteUrl('@Url.Action("DeleteCheckpoint","Checkpoints")');
+
+
                     var editCheckpointsBtn = document.querySelector('.edit-checkpoints-btn'),
                         addCheckpointBtn   = document.querySelector('.js-checkpoint-btn');
 
@@ -127,10 +132,9 @@
                              }
                              else
                              {
-                                 alert('Checkpoint has not been created');
+                                 alert('Checkpoint has not been created.');
                              }
 
-                             console.log('AJAX Success');
                          },
                          error: function(xhr, status, error) {
                              alert(xhr.responseText);
@@ -160,12 +164,10 @@
                              for (let i = 0; i < checkpoints.length; i++)
                              {
                                  checkpointMod.createItem(checkpoints[i].id, checkpoints[i].description, checkpoints[i].isComplete);
-
                              }
-                             console.log(data);
+
                              $('#checkpointModal').modal("show");
 
-                             console.log('Loaded Partial');
                          },
                          error: function(xhr, status, error) {
                              alert(xhr.responseText);
