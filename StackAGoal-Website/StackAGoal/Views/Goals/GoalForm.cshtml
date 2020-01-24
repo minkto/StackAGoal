@@ -6,7 +6,14 @@
 
 }
 
-<h2>New Goal</h2>
+@if (Model.Goal.Id > 0)
+{
+    <h2>Edit Goal</h2>
+}
+else
+{
+    <h2>New Goal</h2>
+}
 @using (Html.BeginForm("Save", "Goals"))
 {
 
@@ -23,7 +30,7 @@
     <div class="form-group">
 
         @Html.LabelFor(g => g.Goal.StartDate)
-        @Html.TextBoxFor(g => g.Goal.StartDate,"{0:yyyy-MM-dd}", new { @class = "form-control", type = "date"})
+        @Html.TextBoxFor(g => g.Goal.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
         @Html.ValidationMessageFor(g => g.Goal.StartDate)
     </div>
 
@@ -35,11 +42,11 @@
 
     @if (Model.Goal.Id > 0)
     {
-    <div class="form-group">
-        @Html.LabelFor(g => g.Goal.IsComplete)
-        @Html.CheckBoxFor(g => g.Goal.IsComplete)
+        <div class="form-group">
+            @Html.LabelFor(g => g.Goal.IsComplete)
+            @Html.CheckBoxFor(g => g.Goal.IsComplete)
 
-    </div>
+        </div>
     }
 
     if (Model.Goal.Id > 0)
@@ -61,7 +68,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="checkpoint-container">
-                            <div class="checkpoint-list">                             
+                            <div class="checkpoint-list">
                             </div>
                             <div class="checkpoint-input-container">
                                 <textarea class="js-checkpoint-description-input"></textarea>
@@ -175,7 +182,7 @@
                          }
                     });
                 }
-                })();          
+                })();
         </script>
     }
 }

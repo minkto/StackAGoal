@@ -19,8 +19,11 @@ html, body {
 .main-content {
     padding: 1px;
     position: relative;
-    height: 1000px;
+    /* height: 1000px; */
     overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    background-color: #F9F9F9;
 }
 
 .clearfix:after {
@@ -45,10 +48,12 @@ a {
     padding: 5px;
     width: 200px;
 }
+
+
 /************************************** Navigation Component**************************************/
 .top-nav {
     width: 100%;
-    height: 80px;
+    height: 85px;
     background-color: #81d13d;
     border-bottom: 5px solid #77bf39;
     box-shadow: 0 0 10px slategrey;
@@ -127,55 +132,73 @@ section.hero {
     padding: 5px;
 }
 /************************************** Login/Register Component**************************************/
-/*.login-register-container{
-	background-color: #39cd43;
-	border-radius: 5px;
-	margin: 50px auto 0 auto;
-	padding: 5px;
-	width: 500px;
-	height: 400px;
-	box-shadow: 0px 0px 4px #c1c1c1;
+.nav-logo-login {
+    margin: 0 auto;
+    display: block;
 }
-.form-group{
-	min-width: 50px;
-	width: 100%;
-	padding: 10px;
-	height: 80%;
-	margin: 0 auto;
-	color: white;
-	background-color: #38c941;
+
+.login-register-container {
+    background-color: #e6e6e6;
+    border-radius: 5px;
+    margin: 25px auto 25px auto;
+    padding: 10px;
+    width: 95%;
+    max-width: 600px;
+    min-width: 250px;
+    height: auto;
+    box-shadow: 1px 1px 4px #6e6e6e;
 }
-.input-container{
-	padding: 5px;
-	width: 50%%;
-	margin: 0 auto;
-}
-.input-container:first-child{
-	margin-top: 40px;
-}
-.form-label{
-	text-align: left;
-	padding: 5px;
-	display: block;
-}
-.input-container input[type="text"],input[type="password"]{
-	width: 100%;
-	height: 30px;
-	box-shadow:0px 1px 1px #acacac;
-	margin: 0 auto;
-	border-radius: 3px;
-	border: none;
-	padding: 5px;
-}
-.input-container .form-button{
-	width: 100%;
-	height: 30px;
-	background: none;
-	background-color: #c4ff3f;
-	border: none;
-	;
-	border-radius: 5px;
-}*/
+
+    .login-register-container h2 {
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .login-register-container .account-form-group {
+        min-width: 50px;
+        width: 100%;
+        padding: 10px;
+        height: 80%;
+        margin: 0 auto;
+        color: black;
+    }
+
+    .login-register-container .input-container {
+        padding: 5px;
+        width: 100%;
+    }
+
+        .login-register-container .input-container:nth-child(4) {
+            margin-top: 30px;
+        }
+
+    .login-register-container .form-label {
+        text-align: left;
+        padding: 5px;
+        display: block;
+    }
+
+    .login-register-container .input-container input[type="text"], input[type="password"], input[type="email"] {
+        width: 100%;
+        height: 30px;
+        box-shadow: 0px 1px 1px #acacac;
+        margin: 0 auto;
+        border-radius: 3px;
+        border: none;
+        padding: 5px;
+    }
+
+    .login-register-container .input-container .form-button {
+        width: 100%;
+        height: 30px;
+        background: none;
+        background-color: #81d13d;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+    }
+
 
 .field-validation-error {
     color: red;
@@ -184,7 +207,7 @@ section.hero {
 .input-container.facebook {
     height: 30px;
     position: relative;
-    width: 50%;
+    width: 100%;
     margin-bottom: 10px;
 }
 
@@ -206,7 +229,7 @@ section.hero {
 /***************************************** Google Register/Sign in*****************************************/
 .input-container.google {
     height: 30px;
-    width: 50%;
+    width: 100%;
     position: relative;
 }
 
@@ -228,7 +251,7 @@ section.hero {
 /*************************************** Navigation - Dashboard Navigation***************************************/
 .dashboard.main-header {
     width: 100%;
-    height: 80px;
+    height: 85px;
     position: fixed;
     top: 0;
     z-index: 2;
@@ -389,7 +412,7 @@ ul.dashboard-side-nav-main li a {
 }
 
 .dashboard-side-nav-collapse.hide-menu + .dashboard-main-content > .inner-content {
-    background-color: yellow;
+    /*background-color: yellow;*/
     margin-left: auto;
     margin-right: auto;
     transition: all 0.2s ease-in-out;
@@ -543,13 +566,20 @@ input[type=checkbox]#hamburger-checkbox {
 }
 
 .dashboard-side-nav-collapse.hide-menu + .container.body-content.inner-content {
-    background-color: yellow;
+    /*background-color: yellow;*/
     margin-left: auto;
     margin-right: auto;
     transition: all 0.2s ease-in-out;
 }
 
+.table-bright {
+    box-shadow: 1px 1px 5px 1px #e3e3e3;
+    border-radius: 10px;
+}
 
+    .table-bright thead {
+        background-color: #C4FFD5;
+    }
 
 /*********************Checkpoint Component*************************************/
 

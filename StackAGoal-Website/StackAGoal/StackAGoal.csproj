@@ -6,12 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Identity\Services\**" />
     <Compile Remove="Data\**" />
     <Compile Remove="Helpers\**" />
+    <Content Remove="Areas\Identity\Services\**" />
     <Content Remove="Data\**" />
     <Content Remove="Helpers\**" />
+    <EmbeddedResource Remove="Areas\Identity\Services\**" />
     <EmbeddedResource Remove="Data\**" />
     <EmbeddedResource Remove="Helpers\**" />
+    <None Remove="Areas\Identity\Services\**" />
     <None Remove="Data\**" />
     <None Remove="Helpers\**" />
   </ItemGroup>

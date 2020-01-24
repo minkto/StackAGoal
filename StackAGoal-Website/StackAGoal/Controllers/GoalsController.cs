@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StackAGoal.Models;
@@ -14,6 +14,7 @@ namespace StackAGoal.Controllers
     /// This controller manages the requests associated with 
     /// managing Goals.
     /// </summary>
+    [Authorize]    
     public class GoalsController : Controller
     {
         private readonly ApplicationDbContext context;

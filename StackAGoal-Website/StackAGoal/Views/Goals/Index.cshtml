@@ -6,76 +6,70 @@
 }
 
 <h2>Goals</h2>
-
-<table class="table table-bordered table-dark table-responsive">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Start Date</th>
-            <th>Category</th>
-            <th>Completed</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach (var item in Model)
-        {
+@if (Model.Count() > 0 == false)
+{
+    <p>No data is available.</p>
+}
+else
+{
+    <table class="table table-bright table-responsive">
+        <thead>
             <tr>
-                <td>@item.Title</td>
-                <td>@item.Description</td>
-                <td>@item.StartDate</td>
-                <td>@(item.Category != null ? item.Category.Name : string.Empty)</td>
-                <td>@Html.CheckBox("Checkbox", @item.IsComplete, new { @disabled = "disabled" })</td>
-                <td>@Html.ActionLink("Edit Goal", "UpdateGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
-                <td>@Html.ActionLink("Delete Goal", "DeleteGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
-
+                <th>Title</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>Category</th>
+                <th>Completed</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
+        </thead>
+        <tbody>
 
-        }
-    </tbody>
-</table>
-@Html.ActionLink("Add Goal", "CreateGoal", "Goals", null, new { @class = "btn btn-primary" })
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Description</td>
+                    <td>@item.StartDate</td>
+                    <td>@(item.Category != null ? item.Category.Name : string.Empty)</td>
+                    <td>@Html.CheckBox("Checkbox", @item.IsComplete, new { @disabled = "disabled" })</td>
+                    <td>@Html.ActionLink("Edit", "UpdateGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
+                    <td>@Html.ActionLink("Delete", "DeleteGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="content-panel">
-                <div class="dashboard-card">
-                    <div class="dashboard-card__number">@Model.Count()</div>
-                    <div class="dashboard-card__text">Number Of Goals</div>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="content-panel">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card__number">@Model.Count()</div>
+                        <div class="dashboard-card__text">Number Of Goals</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="content-panel">
-                <div class="dashboard-card">
-                    <div class="dashboard-card__number">0</div>
-                    <div class="dashboard-card__text">Number Of Goals</div>
+            <div class="col-md-4">
+                <div class="content-panel">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card__number">0</div>
+                        <div class="dashboard-card__text">Number Of Goals</div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="content-panel">
-                <div class="dashboard-card">
-                    <div class="dashboard-card__number">0</div>
-                    <div class="dashboard-card__text">Number Of Goals</div>
+            <div class="col-md-4">
+                <div class="content-panel">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card__number">0</div>
+                        <div class="dashboard-card__text">Number Of Goals</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<script>
-    function loadGoalResults()
-    {
-        // Use the API to do some fetch results;
-        var xhr = new XMLHttpRequest();
 
 
-        //xhr.open("POST","")
-
-    }
-</script>
+}
