@@ -19,13 +19,11 @@
     <div class="selected-icon-container">
         @if (Model.IconId.HasValue)
         {
-            <img class="selected-icon" data-selected-icon="@Model.IconId" src="@Model.ImageURL"
-             style="display:inline-block;width:50px;height:50px" />
+            <img class="selected-icon" data-icon-id="@Model.IconId" src="@Model.ImageURL" />
         }
         else
         {
-            <img class="selected-icon" data-selected-icon="-1" 
-             style="display:inline-block;width:50px;height:50px" />
+            <img class="selected-icon" ddata-icon-id="-1"  />
         }
     </div>
 
@@ -34,8 +32,7 @@
         <div class="icon-list">
             @foreach (Icon icon in Model.Icons)
             {
-                <img class="icon-item" src="@icon.ImageURL" style="display:inline-block;width:50px;height:50px"
-                     data-icon-id="@icon.Id" />;
+                <img class="icon-item" src="@icon.ImageURL" data-icon-id="@icon.Id" />;
             }
         </div>
     </div>
@@ -58,8 +55,8 @@
         let modelIconImageURL = document.querySelector('#imageURL');
 
         currentIcon.src = sourceImage.src;
-        currentIcon.dataset.selectedIcon = sourceImage.dataset.iconId;
-        modelIconId.value = currentIcon.dataset.selectedIcon;
+        currentIcon.dataset.iconId = sourceImage.dataset.iconId;
+        modelIconId.value = currentIcon.dataset.iconId;
         modelIconImageURL.value = currentIcon.src;
     }
 
@@ -87,6 +84,25 @@
         newlySelectedIcon.classList.toggle('active-icon');
     }
 
+    function initialiseIconSelected()
+    {
+        let iconList = document.querySelectorAll('.icon-item');
+        var selectedIcon = document.querySelector('img.selected-icon');
+        var selectedIconId = parseInt(selectedIcon.dataset.iconId);
+
+        if (selectedIconId !== null && selectedIconId > 0 && iconList.length > 0)
+        {
+            for (let i = 0; i < iconList.length; i++) {
+                var icon = iconList[i];
+                if (icon.dataset.iconId == selectedIconId)
+                {
+                    icon.classList.toggle('active-icon');
+                }
+            }
+        }        
+    }
+
+    initialiseIconSelected();
     initIconChange();
 
 </script>

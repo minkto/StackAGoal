@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using StackAGoal.Models.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -30,23 +35,37 @@
 
     <partial name="_dashboardNavPartial.cshtml" />
     <div class="dashboard-side-nav-collapse">
+        <div class="dashboard-profile-container">
+            <img class="dashboard-profile-pic" src="~/images/profile-pic.png">
+            
+            <span> Welcome</span>
+            <span style="word-break:break-word;">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @User.Identity.Name
+                }
+            </span>
+        </div>
         <div class="dashboard-side-nav">
             <ul class="dashboard-side-nav-main">
-                <!-- uses solid style -->
-                <li class="js-submenu-parent"><span class="icon icon-view-goals-icon"></span> Goals</li>
-                <div class="submenu-head">
-                    <li class="submenu">@Html.ActionLink("Add Goal", "CreateGoal", "Goals", null, new { @class = "icon-add-goal-icon" }) </li>
-                    <li class="submenu">@Html.ActionLink("View Goals", "Index", "Goals", null)</li>
-                    <li class="submenu"><a href="#"> Goals Of the Day</a></li>
-                    <li class="submenu"><a href="#"> Completed Goals</a></li>
-                </div>
-                <li class="js-submenu-parent"> Categories</li>
-                <div class="submenu-head">
-                    <li class="submenu"> @Html.ActionLink("Add Category", "CreateCategory", "Categories", null)</li>
-                    <li class="submenu">@Html.ActionLink("View Categories", "Index", "Categories", null)</li>
-                </div>
-                <li><span class="icon-newsicontest"> </span>Achievements</li>
-                <li><span class="icon-newsicontest"> </span>News</li>
+                <li>
+                    <button type="button" class="nav-menu-button js-nav-dropdown-menu"><i class="icon icon-view-goals-icon"></i>Goals</button>
+                </li>
+                <li class="submenu-head">
+                    <ul>
+                        <li class="submenu">@Html.ActionLink("Add Goal", "CreateGoal", "Goals", null, new { @class = "icon-add-goal-icon nav-menu-link" }) </li>
+                        <li class="submenu">@Html.ActionLink("View Goals", "Index", "Goals", null, new { @class = "nav-menu-link" })</li>
+                    </ul>
+                </li>
+                <li> 
+                    <button type="button" class="nav-menu-button js-nav-dropdown-menu">Categories</button>
+                </li>
+                <li class="submenu-head">
+                    <ul>
+                        <li class="submenu"> @Html.ActionLink("Add Category", "CreateCategory", "Categories", null, new { @class = "nav-menu-link" })</li>
+                        <li class="submenu">@Html.ActionLink("View Categories", "Index", "Categories", null, new { @class = "nav-menu-link" })</li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

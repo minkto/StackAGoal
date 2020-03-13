@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackAGoal.Models.Identity;
+using StackAGoal.Services;
 
 namespace StackAGoal
 {
@@ -36,6 +37,13 @@ namespace StackAGoal
             services.AddIdentity<ApplicationUser,IdentityRole<int>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI().AddDefaultTokenProviders();
 
+            services.AddTransient<IEmailSender, EmailService>(s => new EmailService(Configuration["EmailService:Host"],
+                                                                            Configuration.GetValue<int>("EmailService:Port"),
+                                                                            Configuration["EmailService:UserName"],
+                                                                            Configuration["EmailService:Password"],
+                                                                            Configuration.GetValue<bool>("EmailService:EnableSSL"))
+            );
+            services.AddTransient<EmailTemplateService>();
             services.AddMvc()
                 .AddRazorPagesOptions(options=>
             {

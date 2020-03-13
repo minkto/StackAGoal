@@ -1,22 +1,6 @@
-/***********************************************
-*
-* Contains the media queries of the page
-*
-* TODO: Side nav -> Three tiers
-* 500px -> Only show menu ontop
-* 950px -> Shrink size
-***********************************************/
-
+/*********************************************** * * Contains the media queries of the app.* ***********************************************/
 @media only screen and (max-width: 900px) {
-
     html, body {
-    }
-
-    /*.dashboard.main-header .top-nav ul {
-        display:none;
-    }*/
-    .dashboard-profile-pic {
-        width: 30px;
     }
 
     .dashboard-side-nav-collapse {
@@ -24,35 +8,75 @@
         display: none;
         width: 0;
     }
-  
-  .inner-content {
-    margin-left: 0px;
-    /*background-color: lightblue;*/
-  }
+
+    .inner-content {
+        margin-left: 0px;
+    }
 
     .container.body-content.inner-content {
         margin-left: auto;
-        margin-right:auto;
+        margin-right: auto;
     }
-
-
 }
-@media only screen and (max-width:440px) 
-{
-    .top-nav-submenu {
+
+@media only screen and (max-width:440px) {
+    .top-nav {
+        height: auto;
+    }
+
+    .responsive-icons-menu {
+        display: block;
+    }
+
+    .nav-menu-option.selected > ul.nav-dropdown-menu {
+        top: 108px;
+        position: absolute;
         width: 100%;
-        z-index: -1;
-        top: 65px;
-        text-align: center;
+        left: 0;
     }
 
-    span.nav-username 
-    {
-        display:none;
+    .menu-options-container {
+        width: 100%;
+        border-top: 3px solid #77bf39;
+        background-color: #79c33a;
+        margin: 0;
+        display: none;
     }
 
-    .profile-submenu-nav 
-    {
-        position:static;
+        .menu-options-container.show {
+            display: block;
+            padding:0 5px;           
+            margin-top: 20px;
+        }
+
+    span.nav-username {
+        display: none;
     }
+
+    .menu-options-container > .nav-menu-option, 
+    .menu-options-container > .nav-menu-option.selected {
+        position: static;
+        margin-top: 0;
+        padding:0;
+    }
+
+    .nav-menu-button-icon:focus,
+    .nav-menu-button-icon:active {
+        background-color: #71b736 !important;
+    }
+    .responsive-icons-menu.selected {
+        background-color: #77bf39;
+        outline: 2px solid;
+        outline-color: #77bf39;
+    }
+
+    .nav-logo {
+        display: inline-block;
+        padding: 5px;
+        width: 160px;
+        position: absolute;
+        left: 30%;
+    }
+
+
 }

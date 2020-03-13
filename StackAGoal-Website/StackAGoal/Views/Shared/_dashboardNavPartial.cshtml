@@ -5,36 +5,43 @@
 @inject UserManager<ApplicationUser> UserManager
 
 <header class="dashboard main-header">
-    <!-- TODO: Insert Icon -->
-    <div class="top-nav clearfix">
-        <img class="nav-logo" src="~/images/stackagoal-light-logo.png">
-        <div class="hamburger-menu">
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-        </div>
-        <nav>
-            <ul>
-                <li class="profile-submenu-nav">
-                    <a href="#">
+
+    <nav>
+        <div class="top-nav clearfix">
+            <img class="nav-logo" src="~/images/stackagoal-light-logo.png">
+            <div class="hamburger-menu">
+                <button type="button" id="nav-button-hamburger">
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                </button>
+            </div>
+            <div class="responsive-icons-menu">
+                <button  type="button" class="icon-menu-button">
+                    <span class="icon-menu-elipses"></span>
+                    <span class="icon-menu-elipses"></span>
+                    <span class="icon-menu-elipses"></span>
+                </button>
+            </div>
+            <div class="menu-options-container">
+                <div class="nav-menu-option">
+                    <button  type="button" class="nav-menu-button-icon js-nav-menu-icon">
                         <div class="down-arrow"></div>
-                        <img class="dashboard-profile-pic" src="~/images/profile-pic.png"><span class="nav-username">
-                            Welcome
-                            @if (User.Identity.IsAuthenticated)
-                            {@User.Identity.Name}
-                        </span>
-                    </a>
-                    <ul class="top-nav-submenu">
-                        <li><a href="#">Option 1</a></li>
-                        <li><a href="#">Option 2</a></li>
+                        <img class="nav-menu-option-icon" src="~/images/icon-cog.png">
+                    </button>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="#"><i class="icon icon-view-goals-icon"></i>Settings</a></li>
                         <li>
                             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
-                                <button type="submit" class="nav-link btn btn-link">Logout</button>
+                                <button type="submit" id="logoutBtn" class="nav-link btn btn-link">
+                                    <i class="icon icon-sign-out"></i>
+                                    Logout
+                                </button>
                             </form>
                         </li>
                     </ul>
-                </li>
-            </ul>
-        </nav>
-    </div>
+                </div>                
+            </div>
+        </div>
+    </nav>
 </header>

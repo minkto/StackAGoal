@@ -1,74 +1,91 @@
-/**/
-var menuToggle = document.querySelector('.hamburger-menu');
-menuToggle.addEventListener('click', toggleDashboardMenu);
+(function dashboard() {
 
 
-function toggleDashboardMenu() {
-    var dashboardMenu = document.querySelector('.dashboard-side-nav-collapse');
+    function initDashboard() {
 
-    if ((dashboardMenu.classList.contains('show-menu') == false) && (dashboardMenu.classList.contains('hide-menu') == false)) {
-        console.log('Show menu and Hide are off. Turning appropriate menu.');
-        if (dashboardMenu.offsetWidth == 0) {
-            console.log(dashboardMenu.offsetWidth);
-            console.log('Menu will now show');
-            dashboardMenu.classList.toggle('show-menu');
-        } else {
-            console.log('Menu will now be hidden.')
-            console.log(dashboardMenu.offsetWidth);
-
-            dashboardMenu.classList.toggle('hide-menu');
-        }
-    } else if (dashboardMenu.classList.contains('show-menu') == true) {
-        
-        dashboardMenu.classList.toggle('hide-menu');
-        dashboardMenu.classList.toggle('show-menu');
-        console.log('Show menu is on.Now hiding...');
-
-    } else if (dashboardMenu.classList.contains('hide-menu') == true) {
-      
-        dashboardMenu.classList.toggle('hide-menu');
-        dashboardMenu.classList.toggle('show-menu');
-        console.log('Hide menu is on.Now Showing...');
+        initDashboardMenuToggle();
+        initSelectedMenu();
+        initExpandDropdownMenu();
+        initResponsiveMenuOption();
+        initOutsideClick();
     }
 
-    console.log('toggle activated.')
-}
-
-function expandSubmenu()
-{
-    // 1. Get reference to parent submenu.
-    let parentSubMenues = document.querySelectorAll('.js-submenu-parent');
-
-    parentSubMenues.forEach(function (parentSubMenu) {
-        parentSubMenu.addEventListener('click', function () {
-            //alert('Submenu Click.');
-            //3. Find child node.
-            console.log(parentSubMenu.nextElementSibling);
-            let submenu = parentSubMenu.nextElementSibling;
-            console.log(submenu);
-            parentSubMenu.classList.toggle('menu-expanded');
-            submenu.classList.toggle('visible')
-
-           //4. Display the child to block. 
-
-           // 5. Make parent active/on
-
-
+    function initExpandDropdownMenu() {
+        let dropdownMenues = document.querySelectorAll('.js-nav-dropdown-menu');
+        dropdownMenues.forEach(function (dropdownMenu) {
+            dropdownMenu.addEventListener('click', function () {
+                let submenu = dropdownMenu.parentElement.nextElementSibling;
+                dropdownMenu.classList.toggle('menu-expanded');
+                submenu.classList.toggle('visible');
+            });
         });
-    });
-}
+    }
 
-function activateMenu()
-{
-    var profileNav = document.querySelector('.profile-submenu-nav');
-    profileNav.addEventListener('click', function ()
-    {
-        // 1. Toggle class to show active.
-        profileNav.classList.toggle('selected');
+    function initSelectedMenu() {
+        var menuOption = document.querySelectorAll('.js-nav-menu-icon');
+        menuOption.forEach(function (el) {
+            el.addEventListener('click', function () {
+                el.parentElement.classList.toggle('selected');
+            }, null);
+        });
+    }
 
+    function initOutsideClick() {
+        document.addEventListener('click', function (e) {
+            var allMenuOptions = document.querySelectorAll('.js-nav-menu-icon');
+            for (let i = 0; i < allMenuOptions.length; i++) {
+                var isClickInside = allMenuOptions[i].contains(event.target);
+                
+                if (!isClickInside) {
+                    if (allMenuOptions[i].parentElement.classList.contains('selected')) {
+                        allMenuOptions[i].parentElement.classList.toggle('selected');
+                    }
+                }
+            }
+        });
+    }
 
-    }, null);
+    function initResponsiveMenuOption() {
+        var iconMenu = document.querySelector('.icon-menu-button');
+        var iconMenuContainer = document.querySelector('.menu-options-container');
 
-}
-activateMenu();
-expandSubmenu();
+        iconMenu.addEventListener('click', function () {
+            iconMenu.parentElement.classList.toggle('selected');
+            iconMenuContainer.classList.toggle('show');
+
+        }, null);
+    }
+
+    function initDashboardMenuToggle() {
+        var dashboardMenu = document.querySelector('.dashboard-side-nav-collapse');
+        var menuToggle = document.querySelector('#nav-button-hamburger');
+        var hamburgerMenuContainer = document.querySelector('.hamburger-menu');
+
+        
+        menuToggle.addEventListener('click', function () {
+
+            if ((dashboardMenu.classList.contains('show-menu') == false) && (dashboardMenu.classList.contains('hide-menu') == false)) {
+                console.log('Show menu and Hide are off. Turning appropriate menu.');
+                if (dashboardMenu.offsetWidth == 0)
+                {
+                    dashboardMenu.classList.toggle('show-menu');
+                    hamburgerMenuContainer.classList.toggle('show-menu');
+                } else
+                {
+                    dashboardMenu.classList.toggle('hide-menu');
+                }
+            } else if ((dashboardMenu.classList.contains('show-menu') == true) || (dashboardMenu.classList.contains('hide-menu') == true)) {
+
+                dashboardMenu.classList.toggle('hide-menu');
+                dashboardMenu.classList.toggle('show-menu');
+                hamburgerMenuContainer.classList.toggle('show-menu');
+            }
+
+        }, null);       
+    }
+
+    // Initialise the dashboard and navigation menues.
+    initDashboard();
+
+})();
+

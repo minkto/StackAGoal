@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using StackAGoal.Models.Identity;
+using StackAGoal.Services;
 
 namespace StackAGoal.Areas.Identity.Pages.Account
 {
@@ -20,17 +19,23 @@ namespace StackAGoal.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IHostingEnvironment _hosting;
+        private readonly EmailTemplateService emailTemplateService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IHostingEnvironment hosting,
+            EmailTemplateService templateService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _hosting = hosting;
+            emailTemplateService = templateService;
         }
 
         [BindProperty]
@@ -80,8 +85,11 @@ namespace StackAGoal.Areas.Identity.Pages.Account
                         values: new { userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    emailTemplateService.AddTemplateField("confirmemail", callbackUrl);
+                    await emailTemplateService.BuildHTMLTemplateBodyAsync("ConfirmEmailTemplate.html");                    
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", emailTemplateService.HTMLBody);
+
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
