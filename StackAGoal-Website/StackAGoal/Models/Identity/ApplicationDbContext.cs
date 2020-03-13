@@ -22,7 +22,6 @@ namespace StackAGoal.Models.Identity
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-
         }
 
         /// <summary>
@@ -34,8 +33,17 @@ namespace StackAGoal.Models.Identity
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Checkpoint>()
-                        .ToTable("Checkpoints", "dbo");
+            builder.Entity<Checkpoint>().ToTable("Checkpoints", "dbo");
+
+            // Rename default identity table names.
+            builder.Entity<IdentityRoleClaim<int>>().ToTable("RoleClaims", "dbo");
+            builder.Entity<IdentityRole<int>>().ToTable("Roles", "dbo");
+            builder.Entity<IdentityUserClaim<int>>().ToTable("UserClaims", "dbo");
+            builder.Entity<IdentityUserLogin<int>>().ToTable("UserLogins", "dbo");
+            builder.Entity<IdentityUserRole<int>>().ToTable("UserRoles", "dbo");
+            builder.Entity<ApplicationUser>().ToTable("Users", "dbo");
+            builder.Entity<IdentityUserToken<int>>().ToTable("UserTokens", "dbo");
+
         }
     }
 }
