@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using StackAGoal.Models;
-using StackAGoal.Models.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using StackAGoal.Core.Interfaces;
+using StackAGoal.Core.Models;
 using StackAGoal.ViewModels;
 using System.Linq;
 
@@ -10,18 +10,22 @@ namespace StackAGoal.Controllers
     /// <summary>
     /// This controller will manage actions to do with Categories.
     /// </summary>
+    [Authorize]
     public class CategoriesController : Controller
     {
-        private readonly ApplicationDbContext dbContext;
+        private readonly ICategoriesService _categoriesService;
+        private readonly IIconsService _iconsService;
 
-        public CategoriesController(ApplicationDbContext dbContext)
+        public CategoriesController(ICategoriesService categoriesService,
+            IIconsService iconsService)
         {
-            this.dbContext = dbContext;
+            _categoriesService = categoriesService;
+            _iconsService = iconsService;
         }
 
         public IActionResult Index()
         {
-            var categories = dbContext.Categories.ToList();
+            var categories = _categoriesService.GetCategories();
             return View(categories);
         }
 
@@ -29,7 +33,7 @@ namespace StackAGoal.Controllers
         {
             var categoryFormVM = new CategoryFormViewModel()
             {
-                Icons = dbContext.Icons.ToList()
+                Icons = _iconsService.GetIcons().ToList()
             };
 
             return View("CategoryForm", categoryFormVM);
@@ -37,10 +41,10 @@ namespace StackAGoal.Controllers
 
         public IActionResult UpdateCategory(int id)
         {
-            var category = dbContext.Categories.Include(i => i.Icon).Single(c => c.Id == id);
+            var category = _categoriesService.GetCategoryWithIcons(id);
             var categoryViewModel = new CategoryFormViewModel(category)
             {
-                Icons = dbContext.Icons.ToList()
+                Icons = _iconsService.GetIcons()
             };
 
             if (categoryViewModel == null)
@@ -55,7 +59,7 @@ namespace StackAGoal.Controllers
         {
             if (!ModelState.IsValid)
             {
-                categoryVM.Icons = dbContext.Icons.ToList();
+                categoryVM.Icons = _iconsService.GetIcons();
                 return View("CategoryForm", categoryVM);
             }
 
@@ -64,31 +68,31 @@ namespace StackAGoal.Controllers
                 var newCategory = new Category();
                 newCategory.IconId = categoryVM.IconId;
                 newCategory.Name = categoryVM.Name;
-                dbContext.Add(newCategory);
+
+                _categoriesService.AddCategory(newCategory);
+                _categoriesService.Save();
             }
             else
             {
-                var categoryInDb = dbContext.Categories.SingleOrDefault(c => c.Id == categoryVM.Id);
-                categoryInDb.Name = categoryVM.Name;
+                var categoryInDb = _categoriesService.GetCategory(categoryVM.Id.Value);
                 categoryInDb.IconId = categoryVM.IconId;
-            }
+                categoryInDb.Name = categoryVM.Name;
 
-            dbContext.SaveChanges();
+                _categoriesService.Save();
+            }
 
             return RedirectToAction("Index");
         }
 
         public IActionResult DeleteCategory(int id)
         {
-            var category = dbContext.Categories.Single(c => c.Id == id);
+            var category = _categoriesService.GetCategory(id);
 
             if (category == null)
                 BadRequest("Category Not found");
 
-            // This will get the goals associated with this Cateogry and set the CategoryID to null.
-            dbContext.Goals.Where(g => g.CategoryId == category.Id).Load();
-            dbContext.Remove(category);
-            dbContext.SaveChanges();
+            _categoriesService.RemoveCategory(category);
+            _categoriesService.Save();
 
             return RedirectToAction("Index");
         }

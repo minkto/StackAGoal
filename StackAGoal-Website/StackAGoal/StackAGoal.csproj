@@ -21,15 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20191009193905_AddUserReferenceToGoal.cs" />
-    <Compile Remove="Migrations\20191009193905_AddUserReferenceToGoal.Designer.cs" />
-    <Compile Remove="Migrations\20191010200512_AddUserToGoal.cs" />
-    <Compile Remove="Migrations\20191010200512_AddUserToGoal.Designer.cs" />
-    <Compile Remove="Migrations\20191014191323_AddUserToGoal.cs" />
-    <Compile Remove="Migrations\20191014191323_AddUserToGoal.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
@@ -40,6 +31,10 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StackAGoal.Infrastructure\StackAGoal.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

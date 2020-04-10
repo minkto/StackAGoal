@@ -888,5 +888,19 @@ textarea.checkpoint-description.readonly {
     }
 
 
+/************User Settings Container***********/
+.user-settings-container {
+    width: 100%;
+    padding: 5px;
+    margin-top: 15px;
+}
+
+    .user-settings-container ul {
+        list-style:none;
+    }
+
+    .user-settings-container ul li{
+        margin-top:5px;
+    }
 
 

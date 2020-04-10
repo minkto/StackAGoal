@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using StackAGoal.Models.Identity;
+using StackAGoal.Infrastructure.Identity;
 
 namespace StackAGoal.Areas.Identity.Pages.Account
 {

@@ -30,7 +30,7 @@
     <p>Select an Icon </p>
     <div class="icon-selector-container">
         <div class="icon-list">
-            @foreach (Icon icon in Model.Icons)
+            @foreach (var icon in Model.Icons)
             {
                 <img class="icon-item" src="@icon.ImageURL" data-icon-id="@icon.Id" />;
             }

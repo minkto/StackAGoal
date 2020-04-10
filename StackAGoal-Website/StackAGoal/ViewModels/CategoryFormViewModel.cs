@@ -1,9 +1,6 @@
-﻿using StackAGoal.Models;
-using System;
+﻿using StackAGoal.Core.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StackAGoal.ViewModels
 {

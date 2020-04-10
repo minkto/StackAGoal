@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using StackAGoal.Models.Identity;
 using StackAGoal.Services;
+using StackAGoal.Infrastructure.Identity;
 
 namespace StackAGoal.Areas.Identity.Pages.Account
 {
@@ -19,7 +19,6 @@ namespace StackAGoal.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        private readonly IHostingEnvironment _hosting;
         private readonly EmailTemplateService emailTemplateService;
 
         public RegisterModel(
@@ -27,14 +26,12 @@ namespace StackAGoal.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IHostingEnvironment hosting,
             EmailTemplateService templateService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _hosting = hosting;
             emailTemplateService = templateService;
         }
 

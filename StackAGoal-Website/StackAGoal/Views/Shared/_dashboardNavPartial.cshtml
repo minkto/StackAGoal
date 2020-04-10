@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using StackAGoal.Models.Identity
+@using StackAGoal.Infrastructure.Identity
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -30,7 +30,12 @@
                         <img class="nav-menu-option-icon" src="~/images/icon-cog.png">
                     </button>
                     <ul class="nav-dropdown-menu">
-                        <li><a href="#"><i class="icon icon-view-goals-icon"></i>Settings</a></li>
+                        <li>
+                            <a class="form-inline" asp-area="Identity" asp-page="/Account/Manage/Index">
+                                    <i class="icon icon-view-goals-icon"></i>
+                                    Settings
+                            </a>
+                        </li>
                         <li>
                             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post">
                                 <button type="submit" id="logoutBtn" class="nav-link btn btn-link">

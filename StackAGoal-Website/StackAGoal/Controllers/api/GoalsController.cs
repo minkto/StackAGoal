@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StackAGoal.Models;
-using StackAGoal.Models.Identity;
+using StackAGoal.Core.Models;
+using StackAGoal.Infrastructure;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,9 +12,9 @@ namespace StackAGoal.Controllers.api
     [ApiController]
     public class GoalsController : ControllerBase
     {
-        private ApplicationDbContext dbContext;
+        private AppDbContext dbContext;
 
-        public GoalsController(ApplicationDbContext db)
+        public GoalsController(AppDbContext db)
         {
             dbContext = db;
         }
@@ -45,7 +45,7 @@ namespace StackAGoal.Controllers.api
         {
             var goals = dbContext.Goals
                 .Include(g => g.Category)
-                .Where(u => u.UserId == id)
+                //.Where(u => u.UserId == id)
                 .ToList();
 
             if (goals == null)

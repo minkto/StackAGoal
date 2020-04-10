@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using StackAGoal.Models;
-using StackAGoal.Models.Identity;
+using StackAGoal.Core.Interfaces;
+using StackAGoal.Core.Models;
 using StackAGoal.ViewModels;
 using System;
 using System.Linq;
@@ -17,11 +16,14 @@ namespace StackAGoal.Controllers
     [Authorize]    
     public class GoalsController : Controller
     {
-        private readonly ApplicationDbContext context;
+        private readonly ICategoriesService _categoriesService;
+        private readonly IGoalsService _goalsService;
 
-        public GoalsController(ApplicationDbContext db)
+        public GoalsController(ICategoriesService categoriesService, 
+            IGoalsService goalsService)
         {
-            context = db;
+            _categoriesService = categoriesService;
+            _goalsService = goalsService;
         }
 
         /// <summary>
@@ -31,15 +33,11 @@ namespace StackAGoal.Controllers
         /// <returns>A view with the Goals.</returns>
         public IActionResult Index()
         {
-            // Use the current User logged in.
+            //// Use the current User logged in.
             int userID = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var goals = _goalsService.GetGoalsByUser(userID);
 
-            var userGoals = context.Goals
-                .Include(g => g.Category)
-                .Include(u => u.User)
-                .Where(g => g.UserId == userID).ToList();
-
-            return View(userGoals);
+            return View(goals);
         }
 
         /// <summary>
@@ -51,11 +49,11 @@ namespace StackAGoal.Controllers
             var newGoal = new GoalFormViewModel()
             {
                 Goal = new Goal(),
-                Categories = context.Categories.ToList()
+                Categories = _categoriesService.GetCategories().ToList()
             };
             return View("GoalForm", newGoal);
         }
-
+            
         /// <summary>
         /// This action will help to bring a view to
         /// update the selected goal.
@@ -64,17 +62,14 @@ namespace StackAGoal.Controllers
         /// <returns>A view to Update goals.</returns>
         public IActionResult UpdateGoal(int id)
         {
-            // If Goal is Valid, Save
-            var goal = context.Goals.SingleOrDefault(g => g.Id == id);
-            var categories = context.Categories.ToList();
-            
+            var goal = _goalsService.GetGoal(id);
+            var categories = _categoriesService.GetCategories().ToList();            
 
             var goalFormViewModel = new GoalFormViewModel()
             {
                 Goal = goal,
                 CategoryId = goal.CategoryId,
                 Categories = categories
-                
             };
 
             if (goal == null)
@@ -90,13 +85,13 @@ namespace StackAGoal.Controllers
         /// <returns>A </returns>
         public IActionResult DeleteGoal(int id)
         {
-            var goal = context.Goals.SingleOrDefault(g => g.Id == id);
+            var goal = _goalsService.GetGoal(id);
 
             if (goal == null)
                 return BadRequest("Goal Not Found!");
 
-            context.Goals.Remove(goal);
-            context.SaveChanges();
+            _goalsService.RemoveGoal(goal);
+            _goalsService.Save();
 
             return RedirectToAction("Index");
         }
@@ -114,7 +109,7 @@ namespace StackAGoal.Controllers
 
             if (!ModelState.IsValid)
             {
-                var categories = context.Categories.ToList();
+                var categories = _categoriesService.GetCategories().ToList();
                 goalFormViewModel.Categories = categories;
 
                 return View("GoalForm", goalFormViewModel);
@@ -123,22 +118,21 @@ namespace StackAGoal.Controllers
             if (goalFormViewModel.Goal.Id == 0)
             {
                 goalFormViewModel.Goal.UserId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                context.Add(goalFormViewModel.Goal);
+                _goalsService.AddNewGoal(goalFormViewModel.Goal);
+                _goalsService.Save();
             }
-
             else
             {
-                var goalInDb = context.Goals.SingleOrDefault(g => g.Id == goalFormViewModel.Goal.Id);
-
+                var goalInDb = _goalsService.GetGoal(goalFormViewModel.Goal.Id);
                 goalInDb.Title = goalFormViewModel.Goal.Title;
                 goalInDb.Description = goalFormViewModel.Goal.Description;
                 goalInDb.StartDate = goalFormViewModel.Goal.StartDate;
                 goalInDb.CategoryId = goalFormViewModel.Goal.CategoryId;
                 goalInDb.UserId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 goalInDb.IsComplete = goalFormViewModel.Goal.IsComplete;
-            }
 
-            context.SaveChanges();
+                _goalsService.Save();
+            }
 
             return RedirectToAction("Index", "Goals");
         }

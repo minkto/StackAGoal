@@ -1,22 +1,24 @@
-﻿using System;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StackAGoal.Models;
-using StackAGoal.Models.Identity;
+using StackAGoal.Core.Interfaces;
+using StackAGoal.Core.Models;
 using StackAGoal.ViewModels;
+using System.Linq;
 
 namespace StackAGoal.Controllers
 {
+
     /// <summary>
     /// This controller is used to manage Checkpoints.
     /// </summary>
+    [Authorize]
     public class CheckpointsController : Controller
     {
-        protected ApplicationDbContext dbContext;
+        private readonly ICheckpointsService _checkpointsService;
 
-        public CheckpointsController(ApplicationDbContext context)
+        public CheckpointsController(ICheckpointsService checkpointsService)
         {
-            dbContext = context;
+            _checkpointsService = checkpointsService;
         }
 
         public IActionResult Index()
@@ -29,8 +31,8 @@ namespace StackAGoal.Controllers
         {
             if (ModelState.IsValid)
             {
-                dbContext.Add(checkpoint);
-                dbContext.SaveChanges();
+                _checkpointsService.AddCheckpoint(checkpoint);
+                _checkpointsService.Save();
             }
 
             return Json(new
@@ -44,13 +46,13 @@ namespace StackAGoal.Controllers
         public JsonResult UpdateCheckpoint([FromBody]Checkpoint checkpoint)
         {
             int updateResult = 0;
-            var checkpointDb = dbContext.Checkpoints.SingleOrDefault(c => c.Id == checkpoint.Id);
+            var checkpointDb = _checkpointsService.GetCheckpoint(checkpoint.Id);
 
             if (ModelState.IsValid)
             {
                 checkpointDb.Description = checkpoint.Description;
                 checkpointDb.IsComplete = checkpoint.IsComplete;
-                updateResult = dbContext.SaveChanges();
+                updateResult = _checkpointsService.Save();
             }
 
             return Json(new { result = updateResult });
@@ -59,7 +61,7 @@ namespace StackAGoal.Controllers
         [HttpGet]
         public JsonResult GetCheckpointsByGoal(int goalId)
         {
-            var checkpoints = dbContext.Checkpoints.Where(ch => ch.GoalId == goalId).ToList();
+            var checkpoints = _checkpointsService.GetCheckpointsByGoal(goalId).ToList();
             var chkVM = new CheckpointsModalViewModel()
             {
                 GoalId = goalId,
@@ -72,11 +74,11 @@ namespace StackAGoal.Controllers
         public JsonResult DeleteCheckpoint([FromBody]int id)
         {
             int deleteResult = 0;
-            var checkpoint = dbContext.Checkpoints.SingleOrDefault(c => c.Id == id);
+            var checkpoint = _checkpointsService.GetCheckpoint(id);
             if (checkpoint != null)
             {
-                dbContext.Remove(checkpoint);
-                deleteResult = dbContext.SaveChanges();
+                _checkpointsService.RemoveCheckpoint(checkpoint);
+                deleteResult = _checkpointsService.Save();
             }
 
             return Json(new { result = deleteResult });

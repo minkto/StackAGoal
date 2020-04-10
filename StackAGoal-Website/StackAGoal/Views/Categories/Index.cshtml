@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StackAGoal.Models.Category>
+﻿@model IEnumerable<StackAGoal.Core.Models.Category>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_dashboard.cshtml";
@@ -15,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (Category category in Model)
+        @foreach (var category in Model)
         {
         <tr>
             <td>@category.Name</td>

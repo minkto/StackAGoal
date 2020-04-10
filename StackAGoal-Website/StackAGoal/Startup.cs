@@ -7,7 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using StackAGoal.Models.Identity;
+using StackAGoal.Core.Interfaces;
+using StackAGoal.Infrastructure;
+using StackAGoal.Infrastructure.Identity;
+using StackAGoal.Infrastructure.Repositories;
+using StackAGoal.Infrastructure.Services;
 using StackAGoal.Services;
 
 namespace StackAGoal
@@ -31,11 +35,19 @@ namespace StackAGoal
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<ApplicationUser,IdentityRole<int>>()
-                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultUI().AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole<int>>()
+                    .AddEntityFrameworkStores<AppDbContext>()
+                    .AddDefaultUI()
+                    .AddDefaultTokenProviders();
+
+
+            services.AddScoped<IGoalsService, GoalsService>();
+            services.AddScoped<ICategoriesService, CategoriesService>();
+            services.AddScoped<IIconsService, IconsService>();
+            services.AddScoped<ICheckpointsService, CheckpointsService>();
 
             services.AddTransient<IEmailSender, EmailService>(s => new EmailService(Configuration["EmailService:Host"],
                                                                             Configuration.GetValue<int>("EmailService:Port"),
@@ -48,7 +60,7 @@ namespace StackAGoal
                 .AddRazorPagesOptions(options=>
             {
                 // Make the login page the first page.
-                options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
+                options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");          
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
