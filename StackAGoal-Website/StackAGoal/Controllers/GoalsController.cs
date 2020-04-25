@@ -129,7 +129,8 @@ namespace StackAGoal.Controllers
                 goalInDb.StartDate = goalFormViewModel.Goal.StartDate;
                 goalInDb.CategoryId = goalFormViewModel.Goal.CategoryId;
                 goalInDb.UserId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                goalInDb.IsComplete = goalFormViewModel.Goal.IsComplete;
+                goalInDb.IsComplete = _goalsService.IsGoalCompleted(goalFormViewModel.Goal.IsComplete, goalFormViewModel.Goal.DateCompleted);
+                goalInDb.DateCompleted = goalFormViewModel.Goal.DateCompleted;
 
                 _goalsService.Save();
             }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StackAGoal.Core.Interfaces;
 using StackAGoal.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -38,6 +39,22 @@ namespace StackAGoal.Infrastructure.Repositories
                 .ToList();
 
             return goal;
+        }
+
+        public bool IsGoalCompleted(bool isMarkedComplete,DateTime? dateCompleted)
+        {
+            bool result = false;
+            
+            if (isMarkedComplete) 
+            {
+                result =  true;
+            }
+            else if (dateCompleted.HasValue)
+            {
+                result = true;
+            }
+
+            return result;
         }
 
         public IEnumerable<Goal> GetAllGoals()

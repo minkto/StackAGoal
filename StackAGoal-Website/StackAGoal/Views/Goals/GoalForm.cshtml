@@ -8,88 +8,138 @@
 
 @if (Model.Goal.Id > 0)
 {
-    <h2>Edit Goal</h2>
+<h2>Edit Goal</h2>
 }
 else
 {
-    <h2>New Goal</h2>
+<h2>New Goal</h2>
 }
 @using (Html.BeginForm("Save", "Goals"))
 {
 
-    <div class="form-group">
-        @Html.LabelFor(g => g.Goal.Title)
-        @Html.TextBoxFor(g => g.Goal.Title, new { @class = "form-control" })
-        @Html.ValidationMessageFor(g => g.Goal.Title)
-    </div>
+<div class="form-group">
+    @Html.LabelFor(g => g.Goal.Title)
+    @Html.TextBoxFor(g => g.Goal.Title, new { @class = "form-control" })
+    @Html.ValidationMessageFor(g => g.Goal.Title)
+</div>
 
-    <div class="form-group">
-        @Html.LabelFor(g => g.Goal.Description)
-        @Html.TextAreaFor(g => g.Goal.Description, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-
-        @Html.LabelFor(g => g.Goal.StartDate)
-        @Html.TextBoxFor(g => g.Goal.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
-        @Html.ValidationMessageFor(g => g.Goal.StartDate)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(c => c.Goal.Category)
-        @Html.DropDownListFor(c => c.Goal.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "Select a Category", new { @class = "form-control" })
-
-    </div>
-
-    @if (Model.Goal.Id > 0)
-    {
-        <div class="form-group">
-            @Html.LabelFor(g => g.Goal.IsComplete)
-            @Html.CheckBoxFor(g => g.Goal.IsComplete)
-
+<div class="form-group">
+    @Html.LabelFor(g => g.Goal.Description)
+    @Html.TextAreaFor(g => g.Goal.Description, new { @class = "form-control" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(g => g.Goal.StartDate)
+    <div class="input-group">
+        @Html.TextBoxFor(g => g.Goal.StartDate, "{0:dd/MM/yyyy HH:mm}", new { @class = "form-control startdate flatpickr flatpickr-input", @type = "text", @placeholder = "dd/mm/yyyy hh:mm" })
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary clear-date-startdate" type="button">Clear</button>
         </div>
-    }
+    </div>
+    @Html.ValidationMessageFor(g => g.Goal.StartDate)
+</div>
 
-    if (Model.Goal.Id > 0)
-    {
-        <hr />
-        <h2>Options</h2>
-        <button type="button" class="edit-checkpoints-btn btn btn-secondary" data-toggle="modal">
-            Edit Checkpoints
-        </button>
-        <!-- Modal For Checkpoints-->
-        <div class="modal fade" id="checkpointModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Checkpoints</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+<div class="form-group">
+    @Html.LabelFor(c => c.Goal.Category)
+    @Html.DropDownListFor(c => c.Goal.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "Select a Category", new { @class = "form-control" })
+
+</div>
+
+
+        if (Model.Goal.Id > 0)
+        {
+<div class="form-group">
+    @Html.LabelFor(g => g.Goal.IsComplete)
+    @Html.CheckBoxFor(g => g.Goal.IsComplete)
+
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(c => c.Goal.DateCompleted)
+
+    <div class="input-group">
+        @Html.TextBoxFor(g => g.Goal.DateCompleted, "{0:dd/MM/yyyy HH:mm}", new { @class = "form-control enddate flatpickr flatpickr-input", @type = "text", @placeholder = "dd/mm/yyyy hh:mm" })
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary clear-date-completed" type="button">Clear</button>
+        </div>
+    </div>
+    @Html.ValidationMessageFor(g => g.Goal.DateCompleted)
+</div>
+
+<hr />
+<h2>Options</h2>
+<button type="button" class="edit-checkpoints-btn btn btn-secondary" data-toggle="modal">
+    Edit Checkpoints
+</button>
+ <!-- Modal For Checkpoints-->
+<div class="modal fade" id="checkpointModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Checkpoints</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="checkpoint-container">
+                    <div class="checkpoint-list">
                     </div>
-                    <div class="modal-body">
-                        <div class="checkpoint-container">
-                            <div class="checkpoint-list">
-                            </div>
-                            <div class="checkpoint-input-container">
-                                <textarea class="js-checkpoint-description-input"></textarea>
-                                <input type="button" class="js-checkpoint-btn btn btn-secondary" value="Add Checkpoint">
-                            </div>
-                        </div>
+                    <div class="checkpoint-input-container">
+                        <textarea class="js-checkpoint-description-input"></textarea>
+                        <input type="button" class="js-checkpoint-btn btn btn-secondary" value="Add Checkpoint">
                     </div>
                 </div>
             </div>
         </div>
-    }
-    <hr />
+    </div>
+</div>
+            }
+<hr />
 
-    <button type="submit" class="btn btn-primary"> Save </button>
+<button type="submit" class="btn btn-primary"> Save </button>
 
-    @Html.HiddenFor(g => g.Goal.Id)
-    @Html.AntiForgeryToken();
-    @section Scripts
+@Html.HiddenFor(g => g.Goal.Id)
+@Html.AntiForgeryToken();
+@section Scripts
     {
-        <script src="@Url.Content("~/js/checkpointcomponent.js")"></script>
-        <script type="text/javascript">
+    <script src="~/lib/flatpickr/flatpickr.min.js"></script>
+    <script src="@Url.Content("~/js/checkpointcomponent.js")"></script>
+    <script type="text/javascript">
+
+            (function () {
+                flatpickr(".startdate", {
+                    enableTime: true,
+                    dateFormat: "d/m/Y H:i"
+
+                });
+
+                flatpickr(".enddate", {
+                    enableTime: true,
+                    dateFormat: "d/m/Y H:i"
+                });
+
+                var clearStartDateButton = document.querySelector('.clear-date-startdate');
+                clearStartDateButton.addEventListener('click', function () {
+                    flatpickr(".startdate").clear();
+                    flatpickr(".startdate", {
+                        enableTime: true,
+                        dateFormat: "d/m/Y H:i"
+
+                    });
+                });
+
+                var clearDateCompletedButton = document.querySelector('.clear-date-completed');
+                clearDateCompletedButton.addEventListener('click', function () {
+                    flatpickr(".enddate").clear();
+                    flatpickr(".enddate", {
+                        enableTime: true,
+                        dateFormat: "d/m/Y H:i"
+
+                    });
+                });
+            })();
+
+
             (function () {
                 $(document).ready(function ()
                 {
@@ -182,10 +232,10 @@ else
                          }
                     });
                 }
-                })();
-        </script>
-    }
+            })();
+    </script>
 }
+            }
 
 
 

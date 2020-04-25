@@ -416,7 +416,7 @@ section.hero {
     height: 70px;
     position: fixed;
     top: 0;
-    z-index: 2;
+    z-index: 3;
 }
 
 .dashboard-main-content {
@@ -601,6 +601,14 @@ footer {
 .dashboard-card__text {
     text-align: center;
     word-wrap: break-word;
+}
+
+.dashboard-card__icon  {
+    display: inline-block;
+    width: 50px;
+    margin-bottom: 10px;
+    height: auto;
+    padding-right: 10px;
 }
 
 .content-panel {

@@ -1,4 +1,5 @@
 ﻿using StackAGoal.Core.Models;
+using System;
 using System.Collections.Generic;
 
 namespace StackAGoal.Core.Interfaces
@@ -10,6 +11,7 @@ namespace StackAGoal.Core.Interfaces
         void RemoveGoal(Goal goal);
         IEnumerable<Goal> GetGoalsByUser(int userID);
         IEnumerable<Goal> GetAllGoals();
+        bool IsGoalCompleted(bool isMarkedComplete, DateTime? dateCompleted);
         int Save();
     }
 }

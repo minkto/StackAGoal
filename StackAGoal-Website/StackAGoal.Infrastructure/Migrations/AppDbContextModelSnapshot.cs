@@ -175,6 +175,8 @@ namespace StackAGoal.Infrastructure.Migrations
 
                     b.Property<int?>("CategoryId");
 
+                    b.Property<DateTime?>("DateCompleted");
+
                     b.Property<string>("Description");
 
                     b.Property<bool>("IsComplete");

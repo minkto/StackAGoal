@@ -12,7 +12,6 @@
 
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="input-container">
                 <label asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" />

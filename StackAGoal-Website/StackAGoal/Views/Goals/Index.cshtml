@@ -18,6 +18,7 @@ else
                 <th>Title</th>
                 <th>Description</th>
                 <th>Start Date</th>
+                <th>Date Completed</th>
                 <th>Category</th>
                 <th>Completed</th>
                 <th>Edit</th>
@@ -28,16 +29,17 @@ else
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@item.Title</td>
-                    <td>@item.Description</td>
-                    <td>@item.StartDate</td>
-                    <td>@(item.Category != null ? item.Category.Name : string.Empty)</td>
-                    <td>@Html.CheckBox("Checkbox", @item.IsComplete, new { @disabled = "disabled" })</td>
-                    <td>@Html.ActionLink("Edit", "UpdateGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
-                    <td>@Html.ActionLink("Delete", "DeleteGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>@item.StartDate</td>
+                <td>@item.DateCompleted</td>
+                <td>@(item.Category != null ? item.Category.Name : string.Empty)</td>
+                <td>@Html.CheckBox("Checkbox", @item.IsComplete, new { @disabled = "disabled" })</td>
+                <td>@Html.ActionLink("Edit", "UpdateGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
+                <td>@Html.ActionLink("Delete", "DeleteGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
 
-                </tr>
+            </tr>
             }
         </tbody>
     </table>
@@ -47,7 +49,7 @@ else
             <div class="col-md-4">
                 <div class="content-panel">
                     <div class="dashboard-card">
-                        <div class="dashboard-card__number">@Model.Count()</div>
+                        <div class="dashboard-card__number"><img class="dashboard-card__icon"src="~/images/goalscompletedicon.png">@Model.Count()</div>
                         <div class="dashboard-card__text">Number Of Goals</div>
                     </div>
                 </div>
