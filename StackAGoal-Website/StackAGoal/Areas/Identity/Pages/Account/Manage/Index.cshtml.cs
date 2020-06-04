@@ -46,6 +46,7 @@ namespace StackAGoal.Areas.Identity.Pages.Account.Manage
         {
             [Required]
             [EmailAddress]
+            [Display(Name = "Primary Email")]
             public string Email { get; set; }
 
             [Phone]
@@ -94,23 +95,29 @@ namespace StackAGoal.Areas.Identity.Pages.Account.Manage
             var email = await _userManager.GetEmailAsync(user);
             if (Input.Email != email)
             {
-                var setEmailResult = await _userManager.SetEmailAsync(user, Input.Email);
-                if (!setEmailResult.Succeeded)
-                {
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{userId}'.");
-                }
-            }
+                // Check if email is already in use.
+                var existingEmail = await _userManager.FindByEmailAsync(Input.Email);
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{userId}'.");
+                if (existingEmail!= null && existingEmail.Id > 0)
+                {                   
+                    StatusMessage = "Email Address is already in use.";
+                    await _signInManager.RefreshSignInAsync(user);
+                    return RedirectToPage();
                 }
+                else 
+                {
+                    user.Email = Input.Email;
+                    user.UserName = Input.Email;
+
+                    var res = await _userManager.UpdateAsync(user);
+                    if (!res.Succeeded) 
+                    {
+                        var userId = await _userManager.GetUserIdAsync(user);
+                        throw new InvalidOperationException($"Unexpected error occurred setting email for user with ID '{userId}'.");
+
+                    }
+
+                }          
             }
 
             await _signInManager.RefreshSignInAsync(user);
@@ -131,7 +138,7 @@ namespace StackAGoal.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-
+            
             var userId = await _userManager.GetUserIdAsync(user);
             var email = await _userManager.GetEmailAsync(user);
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -142,9 +149,9 @@ namespace StackAGoal.Areas.Identity.Pages.Account.Manage
                 protocol: Request.Scheme);
 
 
-            _emailTemplateService.AddTemplateField("confirmemail", callbackUrl);
-            await _emailTemplateService.BuildHTMLTemplateBodyAsync("ConfirmEmailTemplate.html");
-            await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", _emailTemplateService.HTMLBody);
+            _emailTemplateService.AddTemplateField("confirmnewemail", HtmlEncoder.Default.Encode(callbackUrl));
+            await _emailTemplateService.BuildHTMLTemplateBodyAsync("EmailResetTemplate.html");
+            await _emailSender.SendEmailAsync(Input.Email, "Verify New Email Address", _emailTemplateService.HTMLBody);
             //await _emailSender.SendEmailAsync(
             //    email,
             //    "Confirm your email",

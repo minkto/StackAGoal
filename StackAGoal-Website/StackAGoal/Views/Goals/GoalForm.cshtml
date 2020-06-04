@@ -119,24 +119,32 @@ else
                 });
 
                 var clearStartDateButton = document.querySelector('.clear-date-startdate');
-                clearStartDateButton.addEventListener('click', function () {
-                    flatpickr(".startdate").clear();
-                    flatpickr(".startdate", {
-                        enableTime: true,
-                        dateFormat: "d/m/Y H:i"
+                if (clearStartDateButton !== null && typeof (clearStartDateButton) !== 'undefined')
+                {
+                    clearStartDateButton.addEventListener('click', function () {
+                        flatpickr(".startdate").clear();
+                        flatpickr(".startdate", {
+                            enableTime: true,
+                            dateFormat: "d/m/Y H:i"
 
+                        });
                     });
-                });
+                }
+              
 
                 var clearDateCompletedButton = document.querySelector('.clear-date-completed');
-                clearDateCompletedButton.addEventListener('click', function () {
-                    flatpickr(".enddate").clear();
-                    flatpickr(".enddate", {
-                        enableTime: true,
-                        dateFormat: "d/m/Y H:i"
+                if (clearDateCompletedButton !== null && typeof (clearDateCompletedButton) !== 'undefined')
+                {
+                    clearDateCompletedButton.addEventListener('click', function () {
+                        flatpickr(".enddate").clear();
+                        flatpickr(".enddate", {
+                            enableTime: true,
+                            dateFormat: "d/m/Y H:i"
 
+                        });
                     });
-                });
+                }
+                
             })();
 
 
@@ -154,8 +162,11 @@ else
                     var editCheckpointsBtn = document.querySelector('.edit-checkpoints-btn'),
                         addCheckpointBtn   = document.querySelector('.js-checkpoint-btn');
 
-                    editCheckpointsBtn.addEventListener('click', getCheckpoints);
-                    addCheckpointBtn.addEventListener('click', createCheckpoint);
+                    if (editCheckpointsBtn !== null && typeof (editCheckpointsBtn) !== 'undefined')
+                        editCheckpointsBtn.addEventListener('click', getCheckpoints);
+
+                    if (addCheckpointBtn !== null && typeof (addCheckpointBtn) !== 'undefined')
+                        addCheckpointBtn.addEventListener('click', createCheckpoint);
                 });
 
                 /**

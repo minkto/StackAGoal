@@ -40,15 +40,7 @@
     <partial name="_dashboardNavPartial.cshtml" />
     <div class="dashboard-side-nav-collapse">
         <div class="dashboard-profile-container">
-            <img class="dashboard-profile-pic" src="~/images/profile-pic.png">
             
-            <span> Welcome</span>
-            <span style="word-break:break-word;">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    @User.Identity.Name
-                }
-            </span>
         </div>
         <div class="dashboard-side-nav">
             <ul class="dashboard-side-nav-main">
@@ -106,6 +98,7 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/dashboard.js"></script>
+
 
     </environment>
 

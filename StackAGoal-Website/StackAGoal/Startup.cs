@@ -80,7 +80,6 @@ namespace StackAGoal
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
 
             app.UseAuthentication();
 
@@ -90,8 +89,9 @@ namespace StackAGoal
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            app.UseCookiePolicy();
 
-            
+
         }
     }
 }

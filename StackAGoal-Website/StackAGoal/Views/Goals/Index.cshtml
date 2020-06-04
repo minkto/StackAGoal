@@ -1,61 +1,103 @@
 ﻿@model IEnumerable<StackAGoal.Core.Models.Goal>
 @{
     ViewData["Title"] = "Index";
-    // Layout = "~/Views/Shared/_Layout.cshtml";
     Layout = "~/Views/Shared/_dashboard.cshtml";
 }
 
-<h2>Goals</h2>
 @if (Model.Count() > 0 == false)
 {
-    <p>No data is available.</p>
+    <p>No Goals available.</p>
 }
 else
 {
-    <table class="table table-bright table-responsive">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Start Date</th>
-                <th>Date Completed</th>
-                <th>Category</th>
-                <th>Completed</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var item in Model)
+<div class="content-panel">
+    <div class="dashboard-card">
+        <h3>Goals</h3>
+        <hr />
+        <div class="goals-container">
+            @for(int i= 0; i < Model.Count(); i++)
             {
-            <tr>
-                <td>@item.Title</td>
-                <td>@item.Description</td>
-                <td>@item.StartDate</td>
-                <td>@item.DateCompleted</td>
-                <td>@(item.Category != null ? item.Category.Name : string.Empty)</td>
-                <td>@Html.CheckBox("Checkbox", @item.IsComplete, new { @disabled = "disabled" })</td>
-                <td>@Html.ActionLink("Edit", "UpdateGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
-                <td>@Html.ActionLink("Delete", "DeleteGoal", "Goals", new { id = item.Id }, new { @class = "btn btn-link" })</td>
+                var goal = Model.ElementAt(i);
+                <div class="goal-card clearfix" data-goal-card-id="@i">
+                    <div class="goal-card-top">
+                    </div>
+                    <div class="goal-title">
+                        @goal.Title
+                    </div>
+                    <div class="goal-top-panel clearfix">
+                        <div class="goal-done">
+                            @if(goal.IsComplete)
+                            {
+                                <img style="display: inline-block;width: 50px;margin:0;height: auto;" src="~/images/singlegoalcompletedicon.png">
+                            }                            
+                        </div>
+                        <div class="goal-card-option-container">
+                            <div class="goal-card-menu-option">
+                                <a asp-controller="Goals" asp-action="UpdateGoal" asp-route-id="@goal.Id">Edit</a>
+                            </div>
+                            <div class="goal-card-menu-option">
+                                <a asp-controller="Goals" asp-action="DeleteGoal" asp-route-id="@goal.Id">Delete</a>
+                            </div>
+                        </div>
+                    </div>
 
-            </tr>
+
+                    <div class="goal-more-details-panel">
+                        <button class="goal-more-details-btn btn btn-link" style="color:skyblue;" href="">
+                            More Details >>
+                        </button>
+                    </div>
+                    <div class="goal-card-more-details-container">
+                        <div class="goal-card-header">
+                            <button class="goal-details-btn btn btn-link">Description >> </button>
+                        </div>
+                        <div class="goal-card-details">
+                            @goal.Description
+                        </div>
+
+                        <div class="goal-card-header">
+                            <button class="goal-details-btn btn btn-link">Category >> </button>
+                        </div>
+                        <div class="goal-card-details">
+                            @(goal.Category != null ? goal.Category.Name : string.Empty)
+                        </div>
+                        <div class="goal-card-header">
+                            <button class="goal-details-btn btn btn-link">Times >> </button>
+                        </div>
+                        <div class="goal-card-details">
+                            Start Date: @string.Format(goal.StartDate.HasValue ? goal.StartDate.Value.ToString("dd/MM/yyyy HH:mm") : string.Empty)
+                            <br>
+                            Date Completed:@string.Format(goal.DateCompleted.HasValue ? goal.DateCompleted.Value.ToString("dd/MM/yyyy HH:mm") : string.Empty)
+                        </div>
+                    </div>
+                </div>
+
             }
-        </tbody>
-    </table>
+
+        </div>
+    </div>
+</div>
 
     <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <div class="content-panel">
                     <div class="dashboard-card">
-                        <div class="dashboard-card__number"><img class="dashboard-card__icon"src="~/images/goalscompletedicon.png">@Model.Count()</div>
+                        <div class="dashboard-card__number"><img class="dashboard-card__icon" src="~/images/goalscompletedicon.png">@Model.Count()</div>
                         <div class="dashboard-card__text">Number Of Goals</div>
                     </div>
                 </div>
-            </div>         
+            </div>
         </div>
     </div>
-
-
 }
+
+<script src="~/js/goalcardcomponent.js"></script>
+
+<script>
+
+    (function () {
+        goalCardComponent.initComponent();
+    })();
+
+</script>

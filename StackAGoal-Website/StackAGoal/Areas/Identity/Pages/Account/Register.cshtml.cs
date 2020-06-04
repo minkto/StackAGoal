@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using StackAGoal.Services;
 using StackAGoal.Infrastructure.Identity;
+using System.Text.Encodings.Web;
 
 namespace StackAGoal.Areas.Identity.Pages.Account
 {
@@ -75,15 +76,16 @@ namespace StackAGoal.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
-                        values: new { userId = user.Id, code = code },
+                        values: new { userId = userId, code = code },
                         protocol: Request.Scheme);
 
 
-                    emailTemplateService.AddTemplateField("confirmemail", callbackUrl);
+                    emailTemplateService.AddTemplateField("confirmemail", HtmlEncoder.Default.Encode(callbackUrl));
                     await emailTemplateService.BuildHTMLTemplateBodyAsync("ConfirmEmailTemplate.html");                    
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", emailTemplateService.HTMLBody);
 

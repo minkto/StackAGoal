@@ -1,4 +1,5 @@
-﻿@page
+﻿
+@page
 @model LoginModel
 
 @{
@@ -10,39 +11,38 @@
     <form class="account-form-group" method="post">
         <div class="input-container">
 
-            <label asp-for="Input.Email"></label>
+            <label asp-for="Input.Email" class="login-label"></label>
             <input asp-for="Input.Email" placeholder="Type your email address" />
             <span asp-validation-for="Input.Email" class="text-danger"></span>
 
         </div>
         <div class="input-container">
-            <label asp-for="Input.Password" class="form-label"></label>
+            <label asp-for="Input.Password" class="login-label"></label>
             <input asp-for="Input.Password" placeholder="Type your password" />
             <span asp-validation-for="Input.Password" class="text-danger"></span>
         </div>
 
 
-        <div class="input-container">
-            <div class="checkbox">
+        <div class="input-container clearfix">
+            <div class="checkbox" style="display: inline-block;">
                 <label asp-for="Input.RememberMe">
-                    <input asp-for="Input.RememberMe" />
+                    <input asp-for="Input.RememberMe" style="vertical-align:middle;" />
                     @Html.DisplayNameFor(m => m.Input.RememberMe)
                 </label>
             </div>
+            <a style="display: inline-block;margin-top: 1px;float: right;" asp-page="./ForgotPassword">Forgot your password?</a>
         </div>
         <div class="input-container">
             <button class="form-button" name="submit" type="submit">Login</button>
         </div>
         <div>
             <p>
-                <a asp-page="./ForgotPassword">Forgot your password?</a>
+                Don't have an account?
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Sign up</a>
             </p>
-            <p>
-                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-            </p>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         </div>
-
     </form>
 </div>
 @section Scripts {

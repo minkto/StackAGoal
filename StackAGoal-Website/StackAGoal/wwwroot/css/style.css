@@ -7,7 +7,8 @@ html, body {
     position: relative;
     margin: 0px;
     padding: 0px;
-    font-family: 'Lucida Sans Unicode', sans-serif;
+    font-family: 'Lato', sans-serif;
+    /*font-family: 'Lucida Sans Unicode', sans-serif;*/
     height: 100%;
     overflow-x: hidden;
     font-size: 20px;
@@ -51,7 +52,7 @@ a {
 .top-nav {
     width: 100%;
     height: 70px;
-    min-height:70px;
+    min-height: 70px;
     background-color: #81d13d;
     border-bottom: 5px solid #77bf39;
     box-shadow: 0 0 10px slategrey;
@@ -133,7 +134,6 @@ span.nav-username {
     width: 45px;
     padding-left: 0;
     height: 40px;
-
 }
 
 .nav-menu-link {
@@ -199,8 +199,7 @@ span.nav-username {
 
         .nav-menu-option.selected > ul.nav-dropdown-menu li a:hover,
         .nav-menu-option.selected > ul.nav-dropdown-menu li a:focus,
-        .nav-menu-option.selected > ul.nav-dropdown-menu li a:active
-        {
+        .nav-menu-option.selected > ul.nav-dropdown-menu li a:active{
             background-color: #f5f5f5;
         }
 
@@ -216,7 +215,6 @@ span.nav-username {
     margin-left: 20px;
     margin-right: 5px;
     width: auto;
-   
 }
 
 .nav-menu-option-icon {
@@ -237,7 +235,7 @@ span.nav-username {
 .dashboard-profile-container {
     background-color: #81d13d;
     height: auto;
-    text-align: center;    
+    text-align: center;
     padding: 2px;
     font-size: inherit;
     border-bottom: 5px solid #77bf39;
@@ -256,7 +254,6 @@ span.nav-username {
     display: none;
     height: 30px;
     outline: none;
-
 }
 
 .icon-menu-button:active,
@@ -301,7 +298,7 @@ section.hero {
 }
 
 .login-register-container {
-    background-color: #e6e6e6;
+    /*background-color: #e6e6e6;*/
     border-radius: 5px;
     margin: 25px auto 25px auto;
     padding: 10px;
@@ -309,7 +306,8 @@ section.hero {
     max-width: 600px;
     min-width: 250px;
     height: auto;
-    box-shadow: 1px 1px 4px #6e6e6e;
+    /*box-shadow: 1px 1px 4px #6e6e6e;*/
+    font-size: 70%;
 }
 
     .login-register-container h2 {
@@ -329,6 +327,7 @@ section.hero {
     .login-register-container .input-container {
         padding: 5px;
         width: 100%;
+        margin-bottom: 10px;
     }
 
         .login-register-container .input-container:nth-child(4) {
@@ -341,7 +340,9 @@ section.hero {
         display: block;
     }
 
-    .login-register-container .input-container input[type="text"], input[type="password"], input[type="email"] {
+    .login-register-container .input-container input[type="text"],
+    .login-register-container .input-container input[type="password"],
+    .login-register-container .input-container input[type="email"] {
         width: 100%;
         height: 30px;
         box-shadow: 0px 1px 1px #acacac;
@@ -362,8 +363,23 @@ section.hero {
         border-radius: 5px;
     }
 
+    .login-register-container a {
+        color: #66b325
+    }
+
+.login-label {
+    font-weight: bold;
+}
+/**********************************************Errors/Alerts**********************************************************/
 .field-validation-error {
     color: red;
+}
+
+.text-danger.validation-summary-errors {
+    padding: 5px;
+    background-color: #ffeeee;
+    border-radius: 10px;
+    text-decoration: none;
 }
 /***************************************** Facebook Register/Sign in*****************************************/
 .input-container.facebook {
@@ -438,7 +454,6 @@ section.hero {
 }
 
 .dashboard-side-nav-collapse, .dashboard-side-nav-collapse.show-menu {
-
     display: block;
     margin-left: 0px;
     margin-bottom: 5px;
@@ -447,7 +462,9 @@ section.hero {
     color: #ffffff;
     position: fixed;
     top: 65px;
-    min-height: 95%;
+    /*min-height: 95%;*/
+    height: 95%;
+    overflow-y: hidden;
     z-index: 1;
     opacity: 1;
     transition: all 0.2s ease-in-out;
@@ -460,6 +477,8 @@ section.hero {
     transition: all 0.2s ease;
     width: 100%;
     color: #000;
+    overflow-y: auto;
+    height: calc(65% - 100px);
 }
 
 .dashboard-side-nav-collapse.hide-menu {
@@ -482,27 +501,26 @@ section.hero {
     text-decoration: none;
     padding-left: 0;
     background-color: #ffffff;
-    height: 300px;
+    margin-bottom: 40px;
+    height: 100%;
 }
 
 
-    .dashboard-side-nav-main a.nav-menu-link
-    {
+    .dashboard-side-nav-main a.nav-menu-link {
         padding: 5px;
     }
 
-    .dashboard-side-nav-main a.nav-menu-link:hover,
-    .dashboard-side-nav-main a.nav-menu-link:active,
-    .dashboard-side-nav-main a.nav-menu-link:focus,
-    .dashboard-side-nav-main .nav-menu-button:hover,
-    .dashboard-side-nav-main .nav-menu-button:active {
-        background-color: #CFCFCF !important;
-        transition-duration: 0.2s;
-    }
+        .dashboard-side-nav-main a.nav-menu-link:hover,
+        .dashboard-side-nav-main a.nav-menu-link:active,
+        .dashboard-side-nav-main a.nav-menu-link:focus,
+        .dashboard-side-nav-main .nav-menu-button:hover,
+        .dashboard-side-nav-main .nav-menu-button:active {
+            background-color: #CFCFCF !important;
+            transition-duration: 0.2s;
+        }
 
     .dashboard-side-nav-main a.nav-menu-link,
-    .dashboard-side-nav-main a.nav-menu-button 
-    {
+    .dashboard-side-nav-main a.nav-menu-button {
         border-bottom: 1px solid rgba(255, 255, 255, 0.50);
     }
 
@@ -590,6 +608,7 @@ footer {
     height: auto;
     padding: 10px;
     box-shadow: 0 0 2px 1px #e6e6e6;
+    border-radius: 5px;
 }
 
 .dashboard-card__number {
@@ -603,7 +622,7 @@ footer {
     word-wrap: break-word;
 }
 
-.dashboard-card__icon  {
+.dashboard-card__icon {
     display: inline-block;
     width: 50px;
     margin-bottom: 10px;
@@ -676,7 +695,6 @@ footer {
     #nav-button-hamburger:focus,
     #nav-button-hamburger:active {
         outline: 2px solid #77bf39;
-        
     }
 
 /************** Hamburger rotation effect *******************************/
@@ -715,15 +733,19 @@ input[type=checkbox]#hamburger-checkbox:checked + .hamburger-bar {
     transition: all 0.2s ease-in-out;
 }
 
-.table-bright {
-    box-shadow: 1px 1px 5px 1px #e3e3e3;
-    border-radius: 10px;
-}
+
 
     .table-bright thead {
-        background-color: #C4FFD5;
+        background-color: #c3ffb9;
     }
 
+tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #fdfdfd;
+}
 /*********************Checkpoint Component*************************************/
 
 
@@ -901,14 +923,127 @@ textarea.checkpoint-description.readonly {
     width: 100%;
     padding: 5px;
     margin-top: 15px;
+    border-left: 1px solid rgba(131, 131, 131, 0.95);
 }
 
     .user-settings-container ul {
-        list-style:none;
+        list-style: none;
     }
 
-    .user-settings-container ul li{
-        margin-top:5px;
-    }
+        .user-settings-container ul li {
+            margin-top: 5px;
+        }
 
+
+/************** Goal Header *****************/
+.goals-container {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+}
+
+.goal-card {
+    background-color: rgb(251, 251, 251);
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 5px 5px 0 #e7e5e8;
+    border-radius: 5px;
+}
+
+.goal-card-top {
+    width: 100%;
+    height: 25px;
+    background-color: rgba(129, 209, 61, 0.7);
+    border-top-left-radius: 5px; 
+    border-top-right-radius: 5px;
+}
+
+.goal-title {
+    display: inline-block;
+    width: 70%;
+    height: auto;
+    padding: 5px;
+}
+
+.goal-top-panel {
+    float: right;
+    padding-left: 0px;
+    width: 30%;
+    height: 60%;
+}
+
+.goal-done-flag-container {
+    width: 100%;
+    height: 50%;
+    padding: 5px;
+}
+
+.goal-done {
+    width: 80px;
+    height: auto;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top:5px;
+}
+
+.goal-more-details-panel {
+    display: inline-block;
+    background-color: rgb(248, 244, 244);
+    width: 100%;
+    height: auto
+}
+
+.goal-card-header {
+    border-bottom: 1px solid seashell;
+    display: inline-block;
+    background-color: rgb(248, 255, 242);
+    border-bottom: 1px solid rgb(232, 232, 232);
+    width: 100%;
+    height: auto;
+    padding: 5px;
+}
+
+.goal-card-details {
+    display: inline-block;
+    background-color: #fdfdfd;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+}
+
+.goal-card-header + .goal-card-details {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    transition: all ease-in;
+}
+
+
+.goal-card-header.hide + .goal-card-details {
+    display: none;
+}
+
+
+.goal-card-more-details-container.show {
+    display: block;
+}
+
+.goal-card-more-details-container {
+    display: none;
+}
+
+.goal-card-option-container {
+    width:auto;
+    height: auto;
+    display: inline-block;
+    
+}
+.goal-card-menu-option {
+    width: auto;
+    height: 50px;
+    display: inline-block;
+    padding: 5px;
+}
 
