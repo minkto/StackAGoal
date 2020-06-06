@@ -940,6 +940,8 @@ textarea.checkpoint-description.readonly {
     width: 100%;
     height: auto;
     padding: 5px;
+    max-height:500px;
+    overflow-y:auto;
 }
 
 .goal-card {
