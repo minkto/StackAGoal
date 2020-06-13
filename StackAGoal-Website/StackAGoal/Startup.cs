@@ -38,7 +38,7 @@ namespace StackAGoal
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<ApplicationUser, IdentityRole<int>>()
+            services.AddIdentity<ApplicationUser,AppRole>()
                     .AddEntityFrameworkStores<AppDbContext>()
                     .AddDefaultUI()
                     .AddDefaultTokenProviders();
