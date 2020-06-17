@@ -53,15 +53,18 @@
                         <li class="submenu">@Html.ActionLink("View Goals", "Index", "Goals", null, new { @class = "nav-menu-link" })</li>
                     </ul>
                 </li>
-                <li> 
-                    <button type="button" class="nav-menu-button js-nav-dropdown-menu">Categories</button>
-                </li>
-                <li class="submenu-head">
-                    <ul>
-                        <li class="submenu"> @Html.ActionLink("Add Category", "CreateCategory", "Categories", null, new { @class = "nav-menu-link" })</li>
-                        <li class="submenu">@Html.ActionLink("View Categories", "Index", "Categories", null, new { @class = "nav-menu-link" })</li>
-                    </ul>
-                </li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li>
+                        <button type="button" class="nav-menu-button js-nav-dropdown-menu">Categories</button>
+                    </li>
+                    <li class="submenu-head">
+                        <ul>
+                            <li class="submenu"> @Html.ActionLink("Add Category", "CreateCategory", "Categories", null, new { @class = "nav-menu-link" })</li>
+                            <li class="submenu">@Html.ActionLink("View Categories", "Index", "Categories", null, new { @class = "nav-menu-link" })</li>
+                        </ul>
+                    </li>
+                }
             </ul>
         </div>
     </div>

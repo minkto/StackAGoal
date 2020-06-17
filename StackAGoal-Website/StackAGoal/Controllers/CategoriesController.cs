@@ -10,7 +10,7 @@ namespace StackAGoal.Controllers
     /// <summary>
     /// This controller will manage actions to do with Categories.
     /// </summary>
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CategoriesController : Controller
     {
         private readonly ICategoriesService _categoriesService;
